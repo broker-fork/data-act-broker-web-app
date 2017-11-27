@@ -73,6 +73,10 @@ export class Navbar extends React.Component {
         });
     }
 
+    handleChange(e) {
+        console.log(e.target.value)
+    }
+
     render() {
         const tabNames = this.getTabs();
 
@@ -123,7 +127,13 @@ export class Navbar extends React.Component {
                                 <span className="icon-bar"></span>
                                 <span className="icon-bar"></span>
                             </button>
-                            <a className="navbar-brand usa-da-header-brand" href="#/">DATA Act Broker</a>
+                            <a className="navbar-brand usa-da-header-brand" href="#/">
+                                DATA Act Broker
+                                <select className='navbar-selector' onChange={this.handleChange}>
+                                    <option value="fabs">FABS</option>
+                                    <option value="dabs">DABS</option>
+                                </select>
+                            </a>
                         </div>
 
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

@@ -15,6 +15,10 @@
         display: table-cell;
         vertical-align: middle;
         padding: 0;
+        .navbar-selector {
+            background-color: rgba(0,0,0,0);
+            border-color: rgba(0,0,0,0);
+        }
     }
     #usa-da-header-link-holder {
         padding: 0 12px;
