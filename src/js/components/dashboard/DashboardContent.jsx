@@ -1,10 +1,10 @@
 /**
   * DashboardContent.jsx
   * Created by Kevin Li 10/27/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
-import DashboardTable from './DashboardTable.jsx';
+import DashboardTable from './DashboardTable';
 
 const propTypes = {
     loadTableData: PropTypes.func,
@@ -16,6 +16,18 @@ const propTypes = {
     certifiedTotal: PropTypes.number,
     activeLoading: PropTypes.bool,
     certifiedLoading: PropTypes.bool
+};
+
+const defaultProps = {
+    loadTableData: null,
+    session: null,
+    activeSubmissions: [],
+    certifiedSubmissions: [],
+    type: '',
+    activeTotal: 0,
+    certifiedTotal: 0,
+    activeLoading: false,
+    certifiedLoading: false
 };
 
 export default class DashboardContent extends React.Component {
@@ -73,3 +85,4 @@ export default class DashboardContent extends React.Component {
 }
 
 DashboardContent.propTypes = propTypes;
+DashboardContent.defaultProps = defaultProps;

@@ -1,11 +1,11 @@
 /**
  * HistoryContent.jsx
  * Created by Emily Gullo 9/27/16
- **/
+ */
 
 import React, { PropTypes } from 'react';
 import $ from 'jquery';
-import { generateProtectedUrls, rssFileKey } from '../../helpers/util.js';
+import { generateProtectedUrls, rssFileKey } from '../../helpers/util';
 
 const propTypes = {
     history: PropTypes.object,
@@ -13,8 +13,13 @@ const propTypes = {
     title: PropTypes.string
 };
 
-export default class HistoryContent extends React.Component {
+const defaultProps = {
+    history: null,
+    section: '',
+    title: ''
+};
 
+export default class HistoryContent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -72,3 +77,4 @@ export default class HistoryContent extends React.Component {
 }
 
 HistoryContent.propTypes = propTypes;
+HistoryContent.defaultProps = defaultProps;

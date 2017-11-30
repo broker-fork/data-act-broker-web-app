@@ -1,12 +1,16 @@
 /**
   * LandingBlockBottomLink.jsx
   * Created by Kevin Li 5/17/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 
 const propTypes = {
     onClick: PropTypes.func
+};
+
+const defaultProps = {
+    onClick: null
 };
 
 export default class LandingBlockBottomLink extends React.Component {
@@ -20,3 +24,4 @@ export default class LandingBlockBottomLink extends React.Component {
 }
 
 LandingBlockBottomLink.propTypes = propTypes;
+LandingBlockBottomLink.defaultProps = defaultProps;

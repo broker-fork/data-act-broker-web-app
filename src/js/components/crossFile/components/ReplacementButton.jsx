@@ -1,17 +1,21 @@
 /**
   * ReplacementButton.jsx
   * Created by Kevin Li 6/30/16
-  **/
+  */
 import React, { PropTypes } from 'react';
-import * as Icons from '../../SharedComponents/icons/Icons.jsx';
+import * as Icons from '../../SharedComponents/icons/Icons';
 
 const propTypes = {
     buttonClicked: PropTypes.func,
     expanded: PropTypes.bool
 };
 
-export default class ReplacementButton extends React.Component {
+const defaultProps = {
+    buttonClicked: null,
+    expanded: false
+};
 
+export default class ReplacementButton extends React.Component {
     render() {
         let icon = <Icons.Trash />;
         if (this.props.expanded) {
@@ -31,3 +35,4 @@ export default class ReplacementButton extends React.Component {
 }
 
 ReplacementButton.propTypes = propTypes;
+ReplacementButton.defaultProps = defaultProps;

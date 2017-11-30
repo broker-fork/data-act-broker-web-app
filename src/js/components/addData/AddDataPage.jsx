@@ -1,21 +1,27 @@
 /**
 * AddDataPage.jsx
 * Created by Katie Rose 12/7/15
-**/
+*/
 
 import React, { PropTypes } from 'react';
-import Navbar from '../SharedComponents/navigation/NavigationComponent.jsx';
-import AddDataHeader from './AddDataHeader.jsx';
-import AddDataMeta from './AddDataMeta.jsx';
-import AddDataContainer from '../../containers/addData/AddDataContainer.jsx';
-import Footer from '../SharedComponents/FooterComponent.jsx';
+import Navbar from '../SharedComponents/navigation/NavigationComponent';
+import AddDataHeader from './AddDataHeader';
+import AddDataMeta from './AddDataMeta';
+import AddDataContainer from '../../containers/addData/AddDataContainer';
+import Footer from '../SharedComponents/FooterComponent';
 
-import Banner from '../SharedComponents/Banner.jsx';
+import Banner from '../SharedComponents/Banner';
 
 const propTypes = {
     updateMetaData: PropTypes.func,
     route: PropTypes.object,
     submission: PropTypes.object
+};
+
+const defaultProps = {
+    updateMetaData: null,
+    route: null,
+    submission: null
 };
 
 export default class AddDataPage extends React.Component {
@@ -27,7 +33,7 @@ export default class AddDataPage extends React.Component {
         let bodyComponent = null;
 
         if (this.props.submission.meta.agency === "") {
-            bodyComponent = <AddDataMeta updateMetaData={this.props.updateMetaData}/>;
+            bodyComponent = <AddDataMeta updateMetaData={this.props.updateMetaData} />;
         }
         else {
             bodyComponent = <AddDataContainer metaData={this.props.submission.meta} />;
@@ -48,3 +54,4 @@ export default class AddDataPage extends React.Component {
 }
 
 AddDataPage.propTypes = propTypes;
+AddDataPage.defaultProps = defaultProps;

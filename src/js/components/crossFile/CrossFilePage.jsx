@@ -1,19 +1,24 @@
 /**
   * CrossFilePage.jsx
   * Created by Kevin Li 6/14/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
-import Navbar from '../SharedComponents/navigation/NavigationComponent.jsx';
-import AddDataHeader from './../addData/AddDataHeader.jsx';
-import Progress from '../SharedComponents/ProgressComponent.jsx';
+import Navbar from '../SharedComponents/navigation/NavigationComponent';
+import AddDataHeader from './../addData/AddDataHeader';
+import Progress from '../SharedComponents/ProgressComponent';
 
-import CrossFileContentContainer from '../../containers/crossFile/CrossFileContentContainer.jsx';
-import CrossFileError from './CrossFileError.jsx';
+import CrossFileContentContainer from '../../containers/crossFile/CrossFileContentContainer';
+import CrossFileError from './CrossFileError';
 
 const propTypes = {
     params: PropTypes.object,
     route: PropTypes.object
+};
+
+const defaultProps = {
+    params: null,
+    route: null
 };
 
 export default class CrossFilePage extends React.Component {
@@ -48,7 +53,8 @@ export default class CrossFilePage extends React.Component {
     }
 
     render() {
-        let pageContent = (<CrossFileContentContainer submissionID={this.props.params.submissionID}
+        let pageContent = (<CrossFileContentContainer
+            submissionID={this.props.params.submissionID}
             showError={this.showError.bind(this)} />);
 
         if (this.state.showError) {
@@ -75,3 +81,4 @@ export default class CrossFilePage extends React.Component {
 }
 
 CrossFilePage.propTypes = propTypes;
+CrossFilePage.defaultProps = defaultProps;

@@ -1,11 +1,11 @@
 /**
   * CertifyProgress.jsx
   * Created by Kevin Li 9/7/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
-import FileProgress from '../../SharedComponents/FileProgress.jsx';
-import * as Icons from '../../SharedComponents/icons/Icons.jsx';
+import FileProgress from '../../SharedComponents/FileProgress';
+import * as Icons from '../../SharedComponents/icons/Icons';
 
 const propTypes = {
     closeModal: PropTypes.func,
@@ -17,11 +17,11 @@ const propTypes = {
 const defaultProps = {
     finished: false,
     apiTimeTotal: 1000,
-    apiTimeCount: 1
+    apiTimeCount: 1,
+    closeModal: null
 };
 
 export default class CertifyProgress extends React.Component {
-
     constructor(props) {
         super(props);
 

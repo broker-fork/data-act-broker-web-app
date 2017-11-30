@@ -1,16 +1,16 @@
 /**
   * CrossFileGenerateModalContainer.jsx
   * Created by Kevin Li 7/28/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 import { hashHistory } from 'react-router';
 
 import moment from 'moment';
 
-import GenerateFileBox from '../../components/generateFiles/components/GenerateFileBox.jsx';
+import GenerateFileBox from '../../components/generateFiles/components/GenerateFileBox';
 
-import * as GenerateFilesHelper from '../../helpers/generateFilesHelper.js';
+import * as GenerateFilesHelper from '../../helpers/generateFilesHelper';
 
 const propTypes = {
     disableButton: PropTypes.func,
@@ -23,8 +23,18 @@ const propTypes = {
     type: PropTypes.string
 };
 
-export default class CrossFileGenerateModalContainer extends React.Component {
+const defaultProps = {
+    disableButton: () => {},
+    enableButton: () => {},
+    finishedGenerating: () => {},
+    setButtonText: () => {},
+    setMessage: () => {},
+    label: '',
+    submissionID: '',
+    type: ''
+};
 
+export default class CrossFileGenerateModalContainer extends React.Component {
     constructor(props) {
         super(props);
 
@@ -190,32 +200,34 @@ export default class CrossFileGenerateModalContainer extends React.Component {
         this.props.setButtonText('Generating file...');
         this.props.disableButton();
         this.props.setMessage('');
-        GenerateFilesHelper.generateFile(this.props.type, this.props.submissionID,
-            this.state.file.startDate.format('MM/DD/YYYY'), this.state.file.endDate.format('MM/DD/YYYY'))
-        .then((response) => {
-            this.parseFileStates(response);
-        })
-        .catch((err) => {
-            let errorMessage = 'An error occurred while contacting the server.';
-            if (err && err.body) {
-                errorMessage = err.body.message;
-            }
+        GenerateFilesHelper
+            .generateFile(this.props.type, this.props.submissionID,
+                this.state.file.startDate.format('MM/DD/YYYY'), this.state.file.endDate.format('MM/DD/YYYY'))
+            .then((response) => {
+                this.parseFileStates(response);
+            })
+            .catch((err) => {
+                let errorMessage = 'An error occurred while contacting the server.';
+                if (err && err.body) {
+                    errorMessage = err.body.message;
+                }
 
-            this.setState({
-                file: Object.assign(this.state.file, {
-                    error: {
-                        show: true,
-                        header: 'An error occurred.',
-                        description: errorMessage
-                    }
-                })
+                this.setState({
+                    file: Object.assign(this.state.file, {
+                        error: {
+                            show: true,
+                            header: 'An error occurred.',
+                            description: errorMessage
+                        }
+                    })
+                });
             });
-        });
     }
 
     checkFileStatus() {
         // check the status of the file
-        GenerateFilesHelper.fetchFile(this.props.type, this.props.submissionID)
+        GenerateFilesHelper
+            .fetchFile(this.props.type, this.props.submissionID)
             .then((allResponses) => {
                 this.parseFileStates(allResponses);
             })
@@ -315,6 +327,7 @@ export default class CrossFileGenerateModalContainer extends React.Component {
 }
 
 CrossFileGenerateModalContainer.propTypes = propTypes;
+CrossFileGenerateModalContainer.defaultProps = defaultProps;
 
 CrossFileGenerateModalContainer.contextTypes = {
     store: React.PropTypes.object.isRequired

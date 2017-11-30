@@ -1,7 +1,7 @@
 /**
 * SubmitButton.jsx
 * Created by Katie Rose 12/29/15
-**/
+*/
 
 import React, { PropTypes } from 'react';
 
@@ -16,6 +16,8 @@ const propTypes = {
 const defaultProps = {
     buttonDisabled: true,
     buttonText: 'Submit',
+    className: '',
+    onClick: () => {},
     testId: ''
 };
 
@@ -30,8 +32,13 @@ export default class SubmitButton extends React.Component {
 
         return (
             <div>
-                <button onClick={this.props.onClick} className={newButtonClass} type="submit"
-                    value={this.props.buttonText} disabled={this.props.buttonDisabled} data-testid={this.props.testId}>
+                <button
+                    onClick={this.props.onClick}
+                    className={newButtonClass}
+                    type="submit"
+                    value={this.props.buttonText}
+                    disabled={this.props.buttonDisabled}
+                    data-testid={this.props.testId}>
                     {this.props.buttonText}
                 </button>
             </div>

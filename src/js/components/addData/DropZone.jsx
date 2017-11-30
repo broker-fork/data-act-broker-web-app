@@ -1,13 +1,13 @@
 /**
 * DropZone.jsx
 * Created by Kyle Fox 2/19/16
-**/
+*/
 
 import React, { PropTypes } from 'react';
 import Dropzone from 'react-dropzone';
 import DOMPurify from 'dompurify';
 
-import DropZoneDisplay from './DropZoneDisplay.jsx';
+import DropZoneDisplay from './DropZoneDisplay';
 
 const propTypes = {
     onDrop: PropTypes.func,
@@ -15,6 +15,13 @@ const propTypes = {
     submission: PropTypes.object,
     fileTitle: PropTypes.string,
     requestName: PropTypes.string.isRequired
+};
+
+const defaultProps = {
+    onDrop: null,
+    resetSubmission: null,
+    submission: null,
+    fileTitle: ''
 };
 
 export default class DropZone extends React.Component {
@@ -60,8 +67,12 @@ export default class DropZone extends React.Component {
         dropzoneString = DOMPurify.sanitize(dropzoneString, { ALLOWED_TAGS: ['b'] });
 
         return (
-            <Dropzone className={"usa-da-dropzone text-center" + dropped} activeClassName="active" multiple={false}
-                onDrop={this.props.onDrop} data-testid={"upload-" + this.props.requestName}>
+            <Dropzone
+                className={"usa-da-dropzone text-center" + dropped}
+                activeClassName="active"
+                multiple={false}
+                onDrop={this.props.onDrop}
+                data-testid={"upload-" + this.props.requestName}>
                 <DropZoneDisplay displayMode={displayMode} string={dropzoneString} progress={progress} />
             </Dropzone>
         );
@@ -69,3 +80,4 @@ export default class DropZone extends React.Component {
 }
 
 DropZone.propTypes = propTypes;
+DropZone.defaultProps = defaultProps;

@@ -1,16 +1,20 @@
 /**
   * DashboardPage.jsx
   * Created by Kevin Li 10/21/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
-import Navbar from '../SharedComponents/navigation/NavigationComponent.jsx';
-import Footer from '../SharedComponents/FooterComponent.jsx';
-import DashboardContainer from '../../containers/dashboard/DashboardContainer.jsx';
-import Banner from '../SharedComponents/Banner.jsx';
+import Navbar from '../SharedComponents/navigation/NavigationComponent';
+import Footer from '../SharedComponents/FooterComponent';
+import DashboardContainer from '../../containers/dashboard/DashboardContainer';
+import Banner from '../SharedComponents/Banner';
 
 const propTypes = {
     route: PropTypes.object
+};
+
+const defaultProps = {
+    route: null
 };
 
 export default class DashboardPage extends React.Component {
@@ -49,7 +53,7 @@ export default class DashboardPage extends React.Component {
                         </div>
                     </div>
                     <Banner type={this.state.type} />
-                    <DashboardContainer type={this.state.type}/>
+                    <DashboardContainer type={this.state.type} />
                 </div>
                 <Footer />
             </div>
@@ -58,3 +62,4 @@ export default class DashboardPage extends React.Component {
 }
 
 DashboardPage.propTypes = propTypes;
+DashboardPage.defaultProps = defaultProps;

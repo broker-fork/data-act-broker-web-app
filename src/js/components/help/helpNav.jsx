@@ -1,7 +1,7 @@
 /**
  * HelpNav.jsx
  * Created by Emily Gullo 9/27/16
- **/
+ */
 
 import React, { PropTypes } from 'react';
 
@@ -12,7 +12,9 @@ const propTypes = {
 };
 
 const defaultProps = {
-    pageArray: ['Help', 'Resources', 'Validations']
+    pageArray: ['Help', 'Resources', 'Validations'],
+    selected: '',
+    type: ''
 };
 
 export default class HelpNav extends React.Component {

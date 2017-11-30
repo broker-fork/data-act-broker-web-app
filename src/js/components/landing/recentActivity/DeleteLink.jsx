@@ -1,12 +1,12 @@
 /**
   * DeleteLink.jsx
   * Created by Minahm Kim 02/09/17
-  **/
+  */
 
 import React, { PropTypes } from 'react';
-import * as Icons from '../../SharedComponents/icons/Icons.jsx';
+import * as Icons from '../../SharedComponents/icons/Icons';
 
-import DeleteModal from './DeleteModal.jsx';
+import DeleteModal from './DeleteModal';
 
 const propTypes = {
     reload: PropTypes.func,
@@ -15,6 +15,15 @@ const propTypes = {
     item: PropTypes.object,
     submissionId: PropTypes.number,
     confirm: PropTypes.bool
+};
+
+const defaultProps = {
+    reload: null,
+    warning: null,
+    account: null,
+    item: null,
+    submissionId: null,
+    confirm: false
 };
 
 export default class DeleteLink extends React.Component {
@@ -88,11 +97,15 @@ export default class DeleteLink extends React.Component {
         let button = 'N/A';
         let modal = null;
         if (this.state.delete) {
-            button = (<div onClick={this.confirm.bind(this)} className="trash-icon">
-                <Icons.Trash alt="Delete" />
-            </div>);
-            modal = (<DeleteModal isOpen={this.state.active} closeModal={this.reset.bind(this)}
-                delete={this.delete.bind(this)} id={this.props.submissionId} />);
+            button = (
+                <div onClick={this.confirm.bind(this)} className="trash-icon">
+                    <Icons.Trash alt="Delete" />
+                </div>);
+            modal = (<DeleteModal
+                isOpen={this.state.active}
+                closeModal={this.reset.bind(this)}
+                delete={this.delete.bind(this)}
+                id={this.props.submissionId} />);
         }
 
         return (
@@ -107,3 +120,4 @@ export default class DeleteLink extends React.Component {
 }
 
 DeleteLink.propTypes = propTypes;
+DeleteLink.defaultProps = defaultProps;

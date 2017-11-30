@@ -1,13 +1,13 @@
 /**
   * DashboardPaginator.jsx
   * Created by Kevin Li 10/31/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
 
-import DashboardPaginatorItem from './DashboardPaginatorItem.jsx';
-import DashboardPaginatorArrow from './DashboardPaginatorArrow.jsx';
+import DashboardPaginatorItem from './DashboardPaginatorItem';
+import DashboardPaginatorArrow from './DashboardPaginatorArrow';
 
 const propTypes = {
     changePage: PropTypes.func,
@@ -17,7 +17,8 @@ const propTypes = {
 
 const defaultProps = {
     current: 1,
-    total: 1
+    total: 1,
+    changePage: null
 };
 
 export default class DashboardPaginator extends React.Component {

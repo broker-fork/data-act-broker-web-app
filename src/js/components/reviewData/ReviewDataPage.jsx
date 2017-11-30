@@ -1,24 +1,32 @@
 /**
  * ReviewDataPage.jsx
  * Created by Mike Bray 3/31/16
- **/
+ */
 
-import React, { PropTypes } from 'react';
-import Navbar from '../SharedComponents/navigation/NavigationComponent.jsx';
-import AddDataHeader from './../addData/AddDataHeader.jsx';
-import Progress from '../SharedComponents/ProgressComponent.jsx';
-import Footer from '../SharedComponents/FooterComponent.jsx';
+import React from 'react';
+import PropTypes from 'prop-types';
+import Navbar from '../SharedComponents/navigation/NavigationComponent';
+import AddDataHeader from './../addData/AddDataHeader';
+import Progress from '../SharedComponents/ProgressComponent';
+import Footer from '../SharedComponents/FooterComponent';
 
-import ReviewDataContent from './ReviewDataContent.jsx';
-import ReviewLoading from './ReviewLoading.jsx';
-import PublishedSubmissionWarningBanner from '../../components/SharedComponents/PublishedSubmissionWarningBanner.jsx';
-import Banner from '../../components/SharedComponents/Banner.jsx';
+import ReviewDataContent from './ReviewDataContent';
+import ReviewLoading from './ReviewLoading';
+import PublishedSubmissionWarningBanner from '../../components/SharedComponents/PublishedSubmissionWarningBanner';
+import Banner from '../../components/SharedComponents/Banner';
 
 const propTypes = {
     data: PropTypes.object,
     params: PropTypes.object,
     route: PropTypes.object,
     submission: PropTypes.object
+};
+
+const defaultProps = {
+    data: null,
+    params: null,
+    route: null,
+    submission: null
 };
 
 export default class ReviewDataPage extends React.Component {
@@ -63,3 +71,4 @@ export default class ReviewDataPage extends React.Component {
 }
 
 ReviewDataPage.propTypes = propTypes;
+ReviewDataPage.defaultProps = defaultProps;

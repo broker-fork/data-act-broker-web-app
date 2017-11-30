@@ -1,16 +1,19 @@
 import React, { PropTypes } from 'react';
-import FileProgress from '../SharedComponents/FileProgress.jsx';
-import * as Icons from '../SharedComponents/icons/Icons.jsx';
+import FileProgress from '../SharedComponents/FileProgress';
+import * as Icons from '../SharedComponents/icons/Icons';
 
 const propTypes = {
     displayMode: PropTypes.string,
     string: PropTypes.string,
-    progress: PropTypes.number
+    progress: PropTypes.number,
+    showFile: PropTypes.bool
 };
 
 const defaultProps = {
     showFile: false,
-    string: ''
+    string: '',
+    displayMode: '',
+    progress: 0
 };
 
 export default class DropZoneDisplay extends React.Component {
@@ -30,8 +33,8 @@ export default class DropZoneDisplay extends React.Component {
 
         return (
             <div className="center-block">
-                <div className={"text-center " + "usa-da-icon " + iconClass}><Icons.CloudUpload /></div>
-                <div dangerouslySetInnerHTML={{ __html: this.props.string }}></div>
+                <div className={"text-center usa-da-icon " + iconClass}><Icons.CloudUpload /></div>
+                <div dangerouslySetInnerHTML={{ __html: this.props.string }} />
                 {progress}
             </div>
         );

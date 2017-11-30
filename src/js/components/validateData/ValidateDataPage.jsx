@@ -1,15 +1,15 @@
 /**
 * ValidateDataPage.jsx
 * Created by Katie Rose 1/4/16
-**/
+*/
 
 import React, { PropTypes } from 'react';
-import Navbar from '../SharedComponents/navigation/NavigationComponent.jsx';
-import AddDataHeader from './../addData/AddDataHeader.jsx';
-import Progress from '../SharedComponents/ProgressComponent.jsx';
+import Navbar from '../SharedComponents/navigation/NavigationComponent';
+import AddDataHeader from './../addData/AddDataHeader';
+import Progress from '../SharedComponents/ProgressComponent';
 
-import ValidateDataContainer from '../../containers/validateData/ValidateDataContainer.jsx';
-import ValidateDataErrors from './ValidateDataErrors.jsx';
+import ValidateDataContainer from '../../containers/validateData/ValidateDataContainer';
+import ValidateDataErrors from './ValidateDataErrors';
 
 const propTypes = {
     params: PropTypes.object,
@@ -21,6 +21,10 @@ const propTypes = {
 };
 
 const defaultProps = {
+    params: {},
+    route: {},
+    submissionId: '',
+    csv_url: [],
     link_array: [null],
     subID: null
 };

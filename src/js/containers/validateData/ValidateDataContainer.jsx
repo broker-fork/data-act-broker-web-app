@@ -1,21 +1,21 @@
 /**
 * ValidateDataContainer.jsx
 * Created by Kevin Li 3/29/16
-**/
+*/
 
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as uploadActions from '../../redux/actions/uploadActions.js';
+import * as uploadActions from '../../redux/actions/uploadActions';
 
-import ValidationContent from '../../components/validateData/ValidationContent.jsx';
-import ValidateNotYours from '../../components/validateData/ValidateNotYours.jsx';
-import ValidateLoadingScreen from '../../components/validateData/ValidateLoadingScreen.jsx';
-import PublishedSubmissionWarningBanner from '../../components/SharedComponents/PublishedSubmissionWarningBanner.jsx';
-import Banner from '../../components/SharedComponents/Banner.jsx';
+import ValidationContent from '../../components/validateData/ValidationContent';
+import ValidateNotYours from '../../components/validateData/ValidateNotYours';
+import ValidateLoadingScreen from '../../components/validateData/ValidateLoadingScreen';
+import PublishedSubmissionWarningBanner from '../../components/SharedComponents/PublishedSubmissionWarningBanner';
+import Banner from '../../components/SharedComponents/Banner';
 
-import * as ReviewHelper from '../../helpers/reviewHelper.js';
+import * as ReviewHelper from '../../helpers/reviewHelper';
 
 const propTypes = {
     resetSubmission: PropTypes.func,
@@ -23,6 +23,14 @@ const propTypes = {
     setValidation: PropTypes.func,
     submission: PropTypes.object,
     submissionID: PropTypes.string
+};
+
+const defaultProps = {
+    resetSubmission: () => {},
+    setSubmissionState: () => {},
+    setValidation: () => {},
+    submission: {},
+    submissionID: ''
 };
 
 let statusTimer;
@@ -36,11 +44,9 @@ class ValidateDataContainer extends React.Component {
 
         this.state = {
             finishedPageLoad: false,
-            headerErrors: true,
             validationFailed: false,
             validationFinished: false,
             notYours: false,
-            gtas: null,
             serverError: null,
             agencyName: null
         };
@@ -81,7 +87,6 @@ class ValidateDataContainer extends React.Component {
     reset() {
         this.setState({
             finishedPageLoad: false,
-            headerErrors: true,
             validationFailed: false,
             validationFinished: false,
             notYours: false,
@@ -94,7 +99,6 @@ class ValidateDataContainer extends React.Component {
     processData(callback) {
         let isFinished = true;
         let hasFailed = false;
-        let hasHeaderErrors = false;
 
         // iterate through the data to look for header errors, validation failures, and incomplete validations
         for (const key of singleFileValidations) {
@@ -107,20 +111,16 @@ class ValidateDataContainer extends React.Component {
             }
 
             const item = this.props.submission.validation[key];
-
-            if (item.error_type === 'header_errors') {
-                hasHeaderErrors = true;
-            }
             if (item.job_status === 'failed') {
                 hasFailed = true;
             }
-            if (item.job_status !== 'finished' && item.job_status !== 'invalid' || item.file_status === 'incomplete') {
+            if ((item.job_status !== 'finished' && item.job_status !== 'invalid')
+                || item.file_status === 'incomplete') {
                 isFinished = false;
             }
         }
 
         this.setState({
-            headerErrors: hasHeaderErrors,
             validationFailed: hasFailed,
             validationFinished: isFinished
         }, callback);
@@ -172,10 +172,12 @@ class ValidateDataContainer extends React.Component {
     }
 
     render() {
-        let validationContent = (<ValidationContent {...this.props} hasFinished={this.state.validationFinished}
+        let validationContent = (<ValidationContent
+            {...this.props}
+            hasFinished={this.state.validationFinished}
             hasFailed={this.state.validationFailed}
             submissionID={this.props.submissionID}
-            agencyName = {this.state.agencyName} />);
+            agencyName={this.state.agencyName} />);
 
         if (!this.state.finishedPageLoad) {
             validationContent = <ValidateLoadingScreen />;
@@ -205,9 +207,12 @@ class ValidateDataContainer extends React.Component {
 }
 
 ValidateDataContainer.propTypes = propTypes;
+ValidateDataContainer.defaultProps = defaultProps;
 
 export default connect(
-    (state) => ({ submission: state.submission,
-    session: state.session }),
+    (state) => ({
+        submission: state.submission,
+        session: state.session
+    }),
     (dispatch) => bindActionCreators(uploadActions, dispatch)
 )(ValidateDataContainer);

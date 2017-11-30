@@ -1,12 +1,17 @@
 import React, { PropTypes } from 'react';
-import Navbar from '../SharedComponents/navigation/NavigationComponent.jsx';
-import ReviewDataContent from '../reviewData/ReviewLoading.jsx';
-import Footer from '../SharedComponents/FooterComponent.jsx';
-import AddDataHeader from './../addData/AddDataHeader.jsx';
+import Navbar from '../SharedComponents/navigation/NavigationComponent';
+import ReviewDataContent from '../reviewData/ReviewLoading';
+import Footer from '../SharedComponents/FooterComponent';
+import AddDataHeader from './../addData/AddDataHeader';
 
 const propTypes = {
     route: PropTypes.object,
     submissionID: PropTypes.string
+};
+
+const defaultProps = {
+    route: {},
+    submissionID: ''
 };
 
 export default class LoadingPage extends React.Component {
@@ -37,8 +42,8 @@ export default class LoadingPage extends React.Component {
                 <div className="usa-da-site_wrap">
                     <div className="usa-da-page-content">
                         <Navbar activeTab="submissionGuide" type={this.props.route.type} />
-                        <AddDataHeader submissionID={this.props.submissionID} load={false}/>
-                        <ReviewDataContent {...this.props} data={dummy} submissionID={this.props.submissionID}/>
+                        <AddDataHeader submissionID={this.props.submissionID} load={false} />
+                        <ReviewDataContent {...this.props} data={dummy} submissionID={this.props.submissionID} />
                     </div>
                 </div>
                 <Footer />
@@ -48,3 +53,4 @@ export default class LoadingPage extends React.Component {
 }
 
 LoadingPage.propTypes = propTypes;
+LoadingPage.defaultProps = defaultProps;

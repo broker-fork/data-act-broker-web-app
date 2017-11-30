@@ -1,11 +1,11 @@
 /**
 * DateSelect.jsx
 * Created by Alisa Burdeyny
-**/
+*/
 
 import React, { PropTypes } from 'react';
-import GenerateFileBox from '../generateFiles/components/GenerateFileBox.jsx';
-import LoadingBauble from '../SharedComponents/overlays/LoadingBauble.jsx';
+import GenerateFileBox from '../generateFiles/components/GenerateFileBox';
+import LoadingBauble from '../SharedComponents/overlays/LoadingBauble';
 
 const propTypes = {
     generateFile: PropTypes.func,
@@ -13,6 +13,14 @@ const propTypes = {
     updateError: PropTypes.func,
     d1: PropTypes.object,
     d2: PropTypes.object
+};
+
+const defaultProps = {
+    generateFile: null,
+    handleDateChange: null,
+    updateError: null,
+    d1: null,
+    d2: null
 };
 
 export default class DateSelect extends React.Component {
@@ -57,8 +65,10 @@ export default class DateSelect extends React.Component {
                     updateError={this.updateError.bind(this, "d1")} />
 
                 <div className="right-align-box">
-                    <button className="usa-da-button btn-default" disabled={!this.props.d1.valid ||
-                        this.props.d1.status === "generating"} onClick={this.props.generateFile.bind(this, "d1")}>
+                    <button
+                        className="usa-da-button btn-default"
+                        disabled={!this.props.d1.valid || this.props.d1.status === "generating"}
+                        onClick={this.props.generateFile.bind(this, "d1")}>
                         {loadingD1}{d1Text}
                     </button>
                 </div>
@@ -74,8 +84,10 @@ export default class DateSelect extends React.Component {
                     updateError={this.updateError.bind(this, "d2")} />
 
                 <div className="right-align-box">
-                    <button className="usa-da-button btn-default" disabled={!this.props.d2.valid ||
-                        this.props.d2.status === "generating"} onClick={this.props.generateFile.bind(this, "d2")}>
+                    <button
+                        className="usa-da-button btn-default"
+                        disabled={!this.props.d2.valid || this.props.d2.status === "generating"}
+                        onClick={this.props.generateFile.bind(this, "d2")}>
                         {loadingD2}{d2Text}
                     </button>
                 </div>
@@ -89,3 +101,4 @@ export default class DateSelect extends React.Component {
 }
 
 DateSelect.propTypes = propTypes;
+DateSelect.defaultProps = defaultProps;

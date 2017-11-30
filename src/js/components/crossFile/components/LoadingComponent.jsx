@@ -1,10 +1,10 @@
 /**
   * LoadingComponent.jsx
   * Created by Kevin Li 6/16/16
-  **/
+  */
 
 import React from 'react';
-import * as Icons from '../../SharedComponents/icons/Icons.jsx';
+import * as Icons from '../../SharedComponents/icons/Icons';
 
 export default class LoadingComponent extends React.Component {
     render() {

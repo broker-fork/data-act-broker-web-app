@@ -1,13 +1,18 @@
 /**
   * DateTypeField.jsx
   * Created by Kevin Li 5/19/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 
 const propTypes = {
     onChange: PropTypes.func,
     value: PropTypes.string
+};
+
+const defaultProps = {
+    onChange: null,
+    value: ''
 };
 
 export default class DateTypeField extends React.Component {
@@ -36,16 +41,26 @@ export default class DateTypeField extends React.Component {
                 <div className="row">
                     <div className="col-sm-12 pos-rel text-left usa-da-datetype">
                         <div className="usa-da-datetype-group">
-                            <input type="radio" id="usa-da-datetype-month" name="datetype" value="monthly"
-                                onClick={this.pickedType.bind(this, 'month')} checked={isMonth} />
+                            <input
+                                type="radio"
+                                id="usa-da-datetype-month"
+                                name="datetype"
+                                value="monthly"
+                                onClick={this.pickedType.bind(this, 'month')}
+                                checked={isMonth} />
                             <label htmlFor="usa-da-datetype-month">
                                 Monthly
                             </label>
                         </div>
 
                         <div className="usa-da-datetype-group">
-                            <input type="radio" id="usa-da-datetype-quarterly" name="datetype" value="quarterly"
-                                onClick={this.pickedType.bind(this, 'quarter')} checked={isQuarter}/>
+                            <input
+                                type="radio"
+                                id="usa-da-datetype-quarterly"
+                                name="datetype"
+                                value="quarterly"
+                                onClick={this.pickedType.bind(this, 'quarter')}
+                                checked={isQuarter} />
                             <label htmlFor="usa-da-datetype-quarterly">
                                 Quarterly
                             </label>
@@ -58,3 +73,4 @@ export default class DateTypeField extends React.Component {
 }
 
 DateTypeField.propTypes = propTypes;
+DateTypeField.defaultProps = defaultProps;

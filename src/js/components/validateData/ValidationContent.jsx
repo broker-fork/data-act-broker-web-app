@@ -1,16 +1,16 @@
 /**
  * ValidationContent.jsx
  * Created by Mike Hess 8/15/17
- **/
+ */
 
 import React, { PropTypes } from 'react';
 
-import ValidationOverlayContainer from '../../containers/validateData/ValidationOverlayContainer.jsx';
-import ValidateDataFileContainer from '../../containers/validateData/ValidateDataFileContainer.jsx';
-import ValidateValuesFileContainer from '../../containers/validateData/ValidateValuesFileContainer.jsx';
-import ValidateDataInProgressOverlay from './ValidateDataInProgressOverlay.jsx';
+import ValidationOverlayContainer from '../../containers/validateData/ValidationOverlayContainer';
+import ValidateDataFileContainer from '../../containers/validateData/ValidateDataFileContainer';
+import ValidateValuesFileContainer from '../../containers/validateData/ValidateValuesFileContainer';
+import ValidateDataInProgressOverlay from './ValidateDataInProgressOverlay';
 
-import { fileTypes } from '../../containers/addData/fileTypes.js';
+import { fileTypes } from '../../containers/addData/fileTypes';
 
 const propTypes = {
     session: PropTypes.object,
@@ -18,6 +18,14 @@ const propTypes = {
     agencyName: PropTypes.string,
     hasFailed: PropTypes.bool,
     hasFinished: PropTypes.bool
+};
+
+const defaultProps = {
+    session: {},
+    submission: {},
+    agencyName: "",
+    hasFailed: false,
+    hasFinished: false
 };
 
 export default class ValidationContent extends React.Component {
@@ -39,14 +47,22 @@ export default class ValidationContent extends React.Component {
                 if (fileData.warning_data.length > 0) {
                     warnings.push(type.requestName);
                 }
-                return (<ValidateValuesFileContainer key={index} type={type} data={data}
-                    agencyName={this.props.agencyName} session={this.props.session} />);
+                return (<ValidateValuesFileContainer
+                    key={index}
+                    type={type}
+                    data={data}
+                    agencyName={this.props.agencyName}
+                    session={this.props.session} />);
             }
             else if (fileData) {
                 errors.push(type.requestName);
-                return (<ValidateDataFileContainer key={index} type={type} data={data}
+                return (<ValidateDataFileContainer
+                    key={index}
+                    type={type}
+                    data={data}
                     agencyName={this.props.agencyName} />);
             }
+            return null;
         });
 
         let overlay = '';
@@ -55,7 +71,9 @@ export default class ValidationContent extends React.Component {
             overlay = <ValidateDataInProgressOverlay hasFailed={this.props.hasFailed} />;
         }
         else {
-            overlay = <ValidationOverlayContainer warnings={warnings} errors={errors} />;
+            overlay = (<ValidationOverlayContainer
+                warnings={warnings}
+                errors={errors} />);
         }
 
         return (
@@ -72,3 +90,4 @@ export default class ValidationContent extends React.Component {
 }
 
 ValidationContent.propTypes = propTypes;
+ValidationContent.defaultProps = defaultProps;

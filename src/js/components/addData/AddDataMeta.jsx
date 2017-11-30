@@ -1,25 +1,25 @@
 /**
 * AddDataMeta.jsx
 * Created by Mike Bray 3/21/16
-**/
+*/
 
 import React, { PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-
-import AgencyListContainer from '../../containers/SharedContainers/AgencyListContainer.jsx';
-import * as Icons from '../SharedComponents/icons/Icons.jsx';
-
-import Modal from '../SharedComponents/Modal.jsx';
-import DateTypeField from './metadata/DateTypeField.jsx';
-import DateRangeField from './metadata/DateRangeField.jsx';
-
-import SubmitComponent from './metadata/SubmitComponent.jsx';
-
-import * as AgencyHelper from '../../helpers/agencyHelper.js';
 import { Link } from 'react-router';
+import AgencyListContainer from '../../containers/SharedContainers/AgencyListContainer';
+import * as Icons from '../SharedComponents/icons/Icons';
+import Modal from '../SharedComponents/Modal';
+import DateTypeField from './metadata/DateTypeField';
+import DateRangeField from './metadata/DateRangeField';
+import SubmitComponent from './metadata/SubmitComponent';
+import * as AgencyHelper from '../../helpers/agencyHelper';
 
 const propTypes = {
     updateMetaData: PropTypes.func
+};
+
+const defaultProps = {
+    updateMetaData: null
 };
 
 export default class AddDataMeta extends React.Component {
@@ -133,7 +133,7 @@ export default class AddDataMeta extends React.Component {
         // Only make a request to check certified submission for quarterly submission.
         if (dateType === 'quarter') {
             const month = endDate.substr(0, 2);
-            const quarter = parseInt(month, 10) % 12 + 3;
+            const quarter = (parseInt(month, 10) % 12) + 3;
             let year = endDate.substr(3);
 
             if (quarter === 3) {
@@ -146,8 +146,15 @@ export default class AddDataMeta extends React.Component {
             }).catch((err) => {
                 this.setState({
                     showModal: true,
-                    modalMessage: <div>{err.message} You can update the certified submission <Link
-                        to={`/validateData/${err.submissionId}`}>here</Link>.</div>
+                    modalMessage: (
+                        <div>
+                            {err.message} You can update the certified submission
+                            <Link to={`/validateData/${err.submissionId}`}>
+                                here
+                            </Link>
+                            .
+                        </div>
+                    )
                 });
             });
         }
@@ -195,7 +202,8 @@ export default class AddDataMeta extends React.Component {
 
         let dateTypeField = null;
         if (this.state.showDateTypeField) {
-            dateTypeField = (<DateTypeField value={this.state.dateType}
+            dateTypeField = (<DateTypeField
+                value={this.state.dateType}
                 onChange={this.handleDateTypeChange.bind(this)} />);
         }
 
@@ -206,8 +214,10 @@ export default class AddDataMeta extends React.Component {
 
         let submissionComponent = null;
         if (this.state.showSubmitButton) {
-            submissionComponent = (<SubmitComponent message={this.state.message}
-                onSubmit={this.submitMetadata.bind(this)} disabled={this.state.buttonDisabled} />);
+            submissionComponent = (<SubmitComponent
+                message={this.state.message}
+                onSubmit={this.submitMetadata.bind(this)}
+                disabled={this.state.buttonDisabled} />);
         }
 
         return (
@@ -222,29 +232,38 @@ export default class AddDataMeta extends React.Component {
                                 </div>
 
                                 <div className="row">
-                                    <div className="col-sm-12 col-md-12 typeahead-holder"
+                                    <div
+                                        className="col-sm-12 col-md-12 typeahead-holder"
                                         data-testid="agencytypeahead">
-                                        <AgencyListContainer placeholder="Enter the name of the reporting agency"
-                                            onSelect={this.handleChange.bind(this)} customClass={agencyClass}
-                                            detached={false}/>
+                                        <AgencyListContainer
+                                            placeholder="Enter the name of the reporting agency"
+                                            onSelect={this.handleChange.bind(this)}
+                                            customClass={agencyClass}
+                                            detached={false} />
                                         <div className={"usa-da-icon usa-da-form-icon" + agencyClass}>
                                             {agencyIcon}
                                         </div>
                                     </div>
                                 </div>
 
-                                <ReactCSSTransitionGroup transitionName="usa-da-meta-fade"
-                                    transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                                <ReactCSSTransitionGroup
+                                    transitionName="usa-da-meta-fade"
+                                    transitionEnterTimeout={500}
+                                    transitionLeaveTimeout={300}>
                                     {dateTypeField}
                                 </ReactCSSTransitionGroup>
 
-                                <ReactCSSTransitionGroup transitionName="usa-da-meta-fade"
-                                    transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                                <ReactCSSTransitionGroup
+                                    transitionName="usa-da-meta-fade"
+                                    transitionEnterTimeout={500}
+                                    transitionLeaveTimeout={300}>
                                     {dateRangeField}
                                 </ReactCSSTransitionGroup>
 
-                                <ReactCSSTransitionGroup transitionName="usa-da-meta-fade"
-                                    transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                                <ReactCSSTransitionGroup
+                                    transitionName="usa-da-meta-fade"
+                                    transitionEnterTimeout={500}
+                                    transitionLeaveTimeout={300}>
                                     {submissionComponent}
                                 </ReactCSSTransitionGroup>
                             </div>
@@ -254,7 +273,9 @@ export default class AddDataMeta extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Modal onClose={this.closeModal.bind(this)} isOpen={this.state.showModal}
+                <Modal
+                    onClose={this.closeModal.bind(this)}
+                    isOpen={this.state.showModal}
                     content={this.state.modalMessage} />
             </div>
         );
@@ -262,3 +283,4 @@ export default class AddDataMeta extends React.Component {
 }
 
 AddDataMeta.propTypes = propTypes;
+AddDataMeta.defaultProps = defaultProps;

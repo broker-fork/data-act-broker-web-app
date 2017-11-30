@@ -1,10 +1,10 @@
 /**
 * Username.jsx
 * Created by Kyle Fox 2/19/16
-**/
+*/
 
 import React, { PropTypes } from 'react';
-import * as Icons from '../SharedComponents/icons/Icons.jsx';
+import * as Icons from '../SharedComponents/icons/Icons';
 
 const propTypes = {
     handleChange: PropTypes.func.isRequired,

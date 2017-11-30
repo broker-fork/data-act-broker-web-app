@@ -1,24 +1,28 @@
 /**
   * SubTierAgencyListContainer.jsx
   * Created by Michael Hess
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as subTierAgencyActions from '../../redux/actions/subTierAgencyActions.js';
-import * as AgencyHelper from '../../helpers/agencyHelper.js';
+import * as subTierAgencyActions from '../../redux/actions/subTierAgencyActions';
+import * as AgencyHelper from '../../helpers/agencyHelper';
 
-import Typeahead from '../../components/SharedComponents/Typeahead.jsx';
+import Typeahead from '../../components/SharedComponents/Typeahead';
 
 const propTypes = {
     setSubTierAgencyList: PropTypes.func,
     subTierAgencyList: PropTypes.object
 };
 
-class SubTierAgencyListContainer extends React.Component {
+const defaultProps = {
+    setSubTierAgencyList: () => {},
+    subTierAgencyList: {}
+};
 
+class SubTierAgencyListContainer extends React.Component {
     componentDidMount() {
         this.loadData();
     }
@@ -31,7 +35,7 @@ class SubTierAgencyListContainer extends React.Component {
                     this.props.setSubTierAgencyList(agencies);
                 })
                 .catch((err) => {
-                    console.log(err);
+                    console.error(err);
                 });
         }
     }
@@ -45,14 +49,16 @@ class SubTierAgencyListContainer extends React.Component {
 
     render() {
         return (
-            <Typeahead {...this.props} values={this.props.subTierAgencyList.subTierAgencies}
+            <Typeahead
+                {...this.props}
+                values={this.props.subTierAgencyList.subTierAgencies}
                 formatter={this.dataFormatter} />
         );
     }
-
 }
 
 SubTierAgencyListContainer.propTypes = propTypes;
+SubTierAgencyListContainer.defaultProps = defaultProps;
 
 export default connect(
     (state) => ({ subTierAgencyList: state.subTierAgencyList }),

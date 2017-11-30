@@ -1,21 +1,27 @@
 /**
  * CorrectButtonOverlay.jsx
  * Created by Mike Bray 6/21/16
- **/
+ */
 
 import React, { PropTypes } from 'react';
 
-import CorrectButtonCornerOverlay from './CorrectButtonCornerOverlay.jsx';
-import CorrectButtonFullOverlay from './CorrectButtonFullOverlay.jsx';
+import CorrectButtonCornerOverlay from './CorrectButtonCornerOverlay';
+import CorrectButtonFullOverlay from './CorrectButtonFullOverlay';
 
 const propTypes = {
     onDrop: PropTypes.func,
     removeFile: PropTypes.func,
     fileName: PropTypes.string,
-    isReplacingFile: PropTypes.bool
+    isReplacingFile: PropTypes.bool,
+    fullName: PropTypes.string,
+    type: PropTypes.string
 };
 
 const defaultProps = {
+    onDrop: () => {},
+    removeFile: () => {},
+    fileName: '',
+    isReplacingFile: false,
     fullName: '',
     type: ''
 };
@@ -47,7 +53,9 @@ export default class CorrectButtonOverlay extends React.Component {
 
         let chooseFileOverlay = null;
         if (this.state.showOverlay) {
-            chooseFileOverlay = (<CorrectButtonFullOverlay text={displayText} onDrop={this.props.onDrop}
+            chooseFileOverlay = (<CorrectButtonFullOverlay
+                text={displayText}
+                onDrop={this.props.onDrop}
                 buttonClicked={this.removeFile.bind(this)} />);
         }
 

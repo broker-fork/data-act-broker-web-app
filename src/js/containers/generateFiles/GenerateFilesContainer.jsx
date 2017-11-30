@@ -12,14 +12,14 @@ import moment from 'moment';
 import _ from 'lodash';
 import Q from 'q';
 
-import GenerateFilesContent from '../../components/generateFiles/GenerateFilesContent.jsx';
-import PublishedSubmissionWarningBanner from '../../components/SharedComponents/PublishedSubmissionWarningBanner.jsx';
-import Banner from '../../components/SharedComponents/Banner.jsx';
+import GenerateFilesContent from '../../components/generateFiles/GenerateFilesContent';
+import PublishedSubmissionWarningBanner from '../../components/SharedComponents/PublishedSubmissionWarningBanner';
+import Banner from '../../components/SharedComponents/Banner';
 
-import * as uploadActions from '../../redux/actions/uploadActions.js';
+import * as uploadActions from '../../redux/actions/uploadActions';
 
-import * as GenerateFilesHelper from '../../helpers/generateFilesHelper.js';
-import * as UtilHelper from '../../helpers/util.js';
+import * as GenerateFilesHelper from '../../helpers/generateFilesHelper';
+import * as UtilHelper from '../../helpers/util';
 
 const propTypes = {
     setSubmissionId: PropTypes.func,
@@ -29,10 +29,17 @@ const propTypes = {
     submissionID: PropTypes.string
 };
 
+const defaultProps = {
+    setSubmissionId: () => {},
+    setSubmissionPublishStatus: () => {},
+    showError: () => {},
+    submission: {},
+    submissionID: ""
+};
+
 const timerDuration = 10;
 
 class GenerateFilesContainer extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -210,7 +217,7 @@ class GenerateFilesContainer extends React.Component {
                     this.props.showError(JSON.parse(err.text).message);
                 }
                 else {
-                    console.log(err);
+                    console.error(err);
                 }
             });
     }
@@ -482,7 +489,9 @@ class GenerateFilesContainer extends React.Component {
             <div>
                 {warningMessage}
                 <Banner type="dabs" />
-                <GenerateFilesContent {...this.props} {...this.state}
+                <GenerateFilesContent
+                    {...this.props}
+                    {...this.state}
                     handleDateChange={this.handleDateChange.bind(this)}
                     updateError={this.updateError.bind(this)}
                     generateFiles={this.generateFiles.bind(this)}
@@ -493,9 +502,12 @@ class GenerateFilesContainer extends React.Component {
 }
 
 GenerateFilesContainer.propTypes = propTypes;
+GenerateFilesContainer.defaultProps = defaultProps;
 
 export default connect(
-    (state) => ({ submission: state.submission,
-        session: state.session }),
+    (state) => ({
+        submission: state.submission,
+        session: state.session
+    }),
     (dispatch) => bindActionCreators(uploadActions, dispatch)
 )(GenerateFilesContainer);

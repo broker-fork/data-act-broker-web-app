@@ -1,19 +1,26 @@
 /**
   * DeleteModal.jsx
   * Created by Minahm Kim 03/10/17
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 import Modal from 'react-aria-modal';
-import * as Icons from '../../SharedComponents/icons/Icons.jsx';
+import * as Icons from '../../SharedComponents/icons/Icons';
 
-import * as ReviewHelper from '../../../helpers/reviewHelper.js';
+import * as ReviewHelper from '../../../helpers/reviewHelper';
 
 const propTypes = {
     closeModal: PropTypes.func,
     delete: PropTypes.func,
     id: PropTypes.number,
     isOpen: PropTypes.bool
+};
+
+const defaultProps = {
+    closeModal: () => {},
+    delete: () => {},
+    id: null,
+    isOpen: false
 };
 
 export default class DeleteModal extends React.Component {
@@ -74,8 +81,13 @@ export default class DeleteModal extends React.Component {
         const trueProps = true;
 
         return (
-            <Modal mounted={this.props.isOpen} onExit={this.closeModal.bind(this)} underlayClickExits={trueProps}
-                verticallyCenter={trueProps} initialFocus="#delete-button" titleId="usa-da-certify-modal">
+            <Modal
+                mounted={this.props.isOpen}
+                onExit={this.closeModal.bind(this)}
+                underlayClickExits={trueProps}
+                verticallyCenter={trueProps}
+                initialFocus="#delete-button"
+                titleId="usa-da-certify-modal">
                 <div className="usa-da-modal-page">
                     <div id="usa-da-certify-modal" className="usa-da-certify-modal">
                         <div className="usa-da-certify-modal-close usa-da-icon usa-da-icon-times">
@@ -88,9 +100,12 @@ export default class DeleteModal extends React.Component {
                         </div>
                         {error}
                         <div className="pull-right">
-                            <br/>
-                            <button id="delete-button" className="btn btn-danger delete-button"
-                                onClick={this.clickedDeleteButton.bind(this)} disabled={this.state.disable}>Delete
+                            <br />
+                            <button
+                                id="delete-button"
+                                className="btn btn-danger delete-button"
+                                onClick={this.clickedDeleteButton.bind(this)}
+                                disabled={this.state.disable}>Delete
                             </button>
                             <button className="btn btn-default" onClick={this.closeModal.bind(this)}>Cancel</button>
                         </div>
@@ -102,3 +117,4 @@ export default class DeleteModal extends React.Component {
 }
 
 DeleteModal.propTypes = propTypes;
+DeleteModal.defaultProps = defaultProps;

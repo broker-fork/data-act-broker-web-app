@@ -1,7 +1,7 @@
 /**
   * DashboardPaginatorItem.jsx
   * Created by Kevin Li 10/31/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 
@@ -14,6 +14,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+    changePage: null,
     current: false,
     value: 1,
     showLead: false,

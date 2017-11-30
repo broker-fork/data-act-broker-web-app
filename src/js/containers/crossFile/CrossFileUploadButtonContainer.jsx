@@ -1,15 +1,15 @@
 /**
   * CrossFileUploadButtonContainer.jsx
   * Created by Kevin Li 6/16/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as uploadActions from '../../redux/actions/uploadActions.js';
+import * as uploadActions from '../../redux/actions/uploadActions';
 
-import UploadButton from '../../components/validateData/ValidateDataUploadButton.jsx';
+import UploadButton from '../../components/validateData/ValidateDataUploadButton';
 
 const propTypes = {
     setCrossFileStage: PropTypes.func,
@@ -22,6 +22,9 @@ const propTypes = {
 };
 
 const defaultProps = {
+    setCrossFileStage: () => {},
+    setUploadItem: () => {},
+    submission: {},
     file: {
         letter: '',
         name: '',
@@ -33,7 +36,6 @@ const defaultProps = {
 };
 
 class CrossFileUploadButtonContainer extends React.Component {
-
     onDrop(file) {
         this.props.setUploadItem({
             name: this.props.fileKey,
@@ -74,7 +76,10 @@ class CrossFileUploadButtonContainer extends React.Component {
         }
 
         return (
-            <UploadButton text={displayText} optional={isOptional} additionalClasses={additionalClasses}
+            <UploadButton
+                text={displayText}
+                optional={isOptional}
+                additionalClasses={additionalClasses}
                 onDrop={this.onDrop.bind(this)} />
         );
     }

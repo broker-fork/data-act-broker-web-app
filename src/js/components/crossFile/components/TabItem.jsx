@@ -1,7 +1,7 @@
 /**
   * TabItem.jsx
   * Created by Minahm Kim 11/21/17
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 
@@ -14,6 +14,17 @@ const propTypes = {
     value: PropTypes.string,
     count: PropTypes.number,
     isActive: PropTypes.bool
+};
+
+const defaultProps = {
+    changeTab: null,
+    counts: null,
+    activeTab: '',
+    label: '',
+    status: '',
+    value: '',
+    count: 0,
+    isActive: false
 };
 
 export default class TabItem extends React.Component {
@@ -39,3 +50,4 @@ export default class TabItem extends React.Component {
 }
 
 TabItem.propTypes = propTypes;
+TabItem.defaultProps = defaultProps;

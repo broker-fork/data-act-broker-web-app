@@ -4,12 +4,12 @@
   */
 
 import React, { PropTypes } from 'react';
-import TableRow from './TableRow.jsx';
-import TableHeaders from './TableHeaders.jsx';
+import TableRow from './TableRow';
+import TableHeaders from './TableHeaders';
 
 const propTypes = {
-    data: PropTypes.array.isRequired,
-    headers: PropTypes.array.isRequired,
+    data: PropTypes.array,
+    headers: PropTypes.array,
     sortable: PropTypes.bool,
     onSort: PropTypes.func,
     cellClasses: PropTypes.array,
@@ -21,7 +21,8 @@ const defaultProps = {
     headers: ['Table Data Missing'],
     sortable: true,
     cellClasses: [],
-    headerClasses: []
+    headerClasses: [],
+    onSort: () => {}
 };
 
 export default class ScrollableTable extends React.Component {
@@ -56,8 +57,11 @@ export default class ScrollableTable extends React.Component {
                 <div className="usa-da-scrollable-table-header">
                     <table className="usa-da-table table-bordered">
                         <thead>
-                            <TableHeaders data={this.props.headers} sortable={this.props.sortable}
-                                onSort={this.sortTable.bind(this)} currentSort={this.state.sort}
+                            <TableHeaders
+                                data={this.props.headers}
+                                sortable={this.props.sortable}
+                                onSort={this.sortTable.bind(this)}
+                                currentSort={this.state.sort}
                                 headerClasses={this.props.headerClasses} />
                         </thead>
                     </table>

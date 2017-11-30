@@ -1,14 +1,18 @@
 /**
   * HistoryTable.jsx
   * Created by Minahm Kim 6/12/17
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 
-import * as FileHelper from '../../helpers/generateFilesHelper.js';
+import * as FileHelper from '../../helpers/generateFilesHelper';
 
 const propTypes = {
     submissionID: PropTypes.string
+};
+
+const defaultProps = {
+    submissionID: ''
 };
 
 export default class HistoryTable extends React.Component {
@@ -28,7 +32,7 @@ export default class HistoryTable extends React.Component {
                 this.setState({ metadata: response });
             })
             .catch((err) => {
-                console.log(err);
+                console.error(err);
             });
         this.isUnmounted = false;
     }
@@ -58,7 +62,7 @@ export default class HistoryTable extends React.Component {
                         <p className="metadata">Last Validated: {this.state.metadata.last_validated}</p>
                     </div>
                     <div className="col-xs-12">
-                        <hr/>
+                        <hr />
                     </div>
                 </div>
             </div>
@@ -67,3 +71,4 @@ export default class HistoryTable extends React.Component {
 }
 
 HistoryTable.propTypes = propTypes;
+HistoryTable.defaultProps = defaultProps;

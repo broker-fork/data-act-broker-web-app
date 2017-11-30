@@ -1,17 +1,16 @@
 /**
 * UploadDetachedFilesPage.jsx
 * Created by MichaelHess
-**/
+*/
 
 import React, { PropTypes } from 'react';
-
-import Footer from '../SharedComponents/FooterComponent.jsx';
-import Navbar from '../SharedComponents/navigation/NavigationComponent.jsx';
-
-import UploadDetachedFileMeta from './UploadDetachedFileMeta.jsx';
-import UploadDetachedFileValidation from './UploadDetachedFileValidation.jsx';
-
 import { hashHistory } from 'react-router';
+
+import Footer from '../SharedComponents/FooterComponent';
+import Navbar from '../SharedComponents/navigation/NavigationComponent';
+
+import UploadDetachedFileMeta from './UploadDetachedFileMeta';
+import UploadDetachedFileValidation from './UploadDetachedFileValidation';
 
 const propTypes = {
     setSubmissionId: PropTypes.func,
@@ -20,6 +19,15 @@ const propTypes = {
     params: PropTypes.object,
     route: PropTypes.object,
     submission: PropTypes.object
+};
+
+const defaultProps = {
+    setSubmissionId: () => {},
+    setSubmissionState: () => {},
+    history: {},
+    params: {},
+    route: {},
+    submission: {}
 };
 
 export default class UploadDetachedFilesPage extends React.Component {
@@ -57,7 +65,7 @@ export default class UploadDetachedFilesPage extends React.Component {
 
     updateMeta(meta) {
         this.setState({
-            meta
+            showMeta: meta
         });
     }
 
@@ -72,13 +80,17 @@ export default class UploadDetachedFilesPage extends React.Component {
     render() {
         let content = null;
         if (!this.state.showMeta) {
-            content = (<UploadDetachedFileValidation {...this.props} submission={this.props.submission}
+            content = (<UploadDetachedFileValidation
+                {...this.props}
+                submission={this.props.submission}
                 setSubmissionId={this.props.setSubmissionId.bind(this)} />);
         }
         else {
-            content = (<UploadDetachedFileMeta setSubmissionState={this.props.setSubmissionState}
+            content = (<UploadDetachedFileMeta
+                setSubmissionState={this.props.setSubmissionState}
                 setSubmissionId={this.props.setSubmissionId.bind(this)}
-                history={this.props.history} submission={this.props.submission}
+                history={this.props.history}
+                submission={this.props.submission}
                 validate={this.validate.bind(this)} />);
         }
 
@@ -86,7 +98,9 @@ export default class UploadDetachedFilesPage extends React.Component {
             <div className="usa-da-upload-detached-files-page">
                 <div className="usa-da-site_wrap">
                     <div className="usa-da-page-content">
-                        <Navbar activeTab="FABSAddData" type={this.props.route.type} />
+                        <Navbar
+                            activeTab="FABSAddData"
+                            type={this.props.route.type} />
                         <div className="usa-da-upload-detached-files-page">
                             <div className="usa-da-site_wrap">
                                 {content}
@@ -101,3 +115,4 @@ export default class UploadDetachedFilesPage extends React.Component {
 }
 
 UploadDetachedFilesPage.propTypes = propTypes;
+UploadDetachedFilesPage.defaultProps = defaultProps;

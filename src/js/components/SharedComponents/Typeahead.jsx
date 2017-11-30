@@ -7,13 +7,13 @@ import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import Awesomplete from 'awesomplete';
 
-import TypeaheadWarning from './TypeaheadWarning.jsx';
+import TypeaheadWarning from './TypeaheadWarning';
 
 const propTypes = {
     formatter: PropTypes.func,
     onSelect: PropTypes.func.isRequired,
     internalValue: PropTypes.array,
-    values: PropTypes.array.isRequired,
+    values: PropTypes.array,
     customClass: PropTypes.string,
     errorHeader: PropTypes.string,
     errorDescription: PropTypes.string,
@@ -78,15 +78,17 @@ export default class Typeahead extends React.Component {
     mountAwesomeplete() {
         const target = this.refs.awesomplete;
         if (this.props.prioritySort) {
-            this.typeahead = new Awesomplete(target, { sort: (a, b) => {
-                if (a.value.priority > b.value.priority) {
-                    return 1;
+            this.typeahead = new Awesomplete(target, {
+                sort: (a, b) => {
+                    if (a.value.priority > b.value.priority) {
+                        return 1;
+                    }
+                    if (a.value.priority < b.value.priority) {
+                        return -1;
+                    }
+                    return 0;
                 }
-                if (a.value.priority < b.value.priority) {
-                    return -1;
-                }
-                return 0;
-            } });
+            });
         }
         else {
             this.typeahead = new Awesomplete(target);
@@ -220,9 +222,16 @@ export default class Typeahead extends React.Component {
 
         return (
             <div className={"usa-da-typeahead" + disabledClass}>
-                <input className={this.props.customClass} ref="awesomplete" type="text" placeholder={placeholder}
-                    value={this.state.value} onChange={this.changedText.bind(this)} tabIndex={this.props.tabIndex}
-                    disabled={disabled} aria-required={this.props.isRequired} />
+                <input
+                    className={this.props.customClass}
+                    ref="awesomplete"
+                    type="text"
+                    placeholder={placeholder}
+                    value={this.state.value}
+                    onChange={this.changedText.bind(this)}
+                    tabIndex={this.props.tabIndex}
+                    disabled={disabled}
+                    aria-required={this.props.isRequired} />
                 {warning}
             </div>
         );

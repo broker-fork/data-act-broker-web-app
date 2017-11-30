@@ -1,23 +1,27 @@
 /**
 * DropZoneContainer.jsx
 * Created by Kevin Li 3/24/16
-**/
+*/
 
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as uploadActions from '../../redux/actions/uploadActions.js';
+import * as uploadActions from '../../redux/actions/uploadActions';
 
-import DropZone from '../../components/addData/DropZone.jsx';
+import DropZone from '../../components/addData/DropZone';
 
 const propTypes = {
     setUploadItem: PropTypes.func,
     requestName: PropTypes.string
 };
 
-class DropZoneContainer extends React.Component {
+const defaultProps = {
+    setUploadItem: () => {},
+    requestName: ""
+};
 
+class DropZoneContainer extends React.Component {
     onDrop(files) {
         const file = files[0];
 
@@ -38,6 +42,7 @@ class DropZoneContainer extends React.Component {
 }
 
 DropZoneContainer.propTypes = propTypes;
+DropZoneContainer.defaultProps = defaultProps;
 
 export default connect(
     (state) => ({ submission: state.submission }),

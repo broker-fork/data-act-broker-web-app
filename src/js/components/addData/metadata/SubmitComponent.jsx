@@ -1,10 +1,10 @@
 /**
   * SubmitComponent.jsx
   * Created by Kevin Li 5/20/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
-import SubmitButton from '../../SharedComponents/SubmitButton.jsx';
+import SubmitButton from '../../SharedComponents/SubmitButton';
 
 const propTypes = {
     onSubmit: PropTypes.func,
@@ -13,7 +13,9 @@ const propTypes = {
 };
 
 const defaultProps = {
-    disabled: false
+    disabled: false,
+    onSubmit: null,
+    message: ''
 };
 
 export default class SubmitComponent extends React.Component {
@@ -25,9 +27,11 @@ export default class SubmitComponent extends React.Component {
                         {this.props.message}
                     </div>
                     <div className="col-sm-4" data-testid="submitbutton">
-                        <SubmitButton onClick={this.props.onSubmit}
-                            className="usa-da-button btn-primary btn-lg pull-right" buttonText="Submit"
-                            buttonDisabled={this.props.disabled} buttonDisabled={false} />
+                        <SubmitButton
+                            onClick={this.props.onSubmit}
+                            className="usa-da-button btn-primary btn-lg pull-right"
+                            buttonText="Submit"
+                            buttonDisabled={this.props.disabled} />
                     </div>
                 </div>
             </div>

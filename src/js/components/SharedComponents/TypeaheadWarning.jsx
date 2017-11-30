@@ -1,10 +1,10 @@
 /**
   * TypeaheadWarning.jsx
   * Created by Kevin Li 7/14/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
-import * as Icons from './icons/Icons.jsx';
+import * as Icons from './icons/Icons';
 
 const propTypes = {
     description: PropTypes.string,

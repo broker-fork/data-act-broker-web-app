@@ -1,10 +1,10 @@
 /**
   * ErrorTabs.jsx
   * Created by Kevin Li 8/29/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
-import * as TabItem from './TabItem.jsx';
+import * as TabItem from './TabItem';
 
 const propTypes = {
     changeTab: PropTypes.func,
@@ -14,7 +14,8 @@ const propTypes = {
     status: PropTypes.string,
     value: PropTypes.string,
     count: PropTypes.number,
-    isActive: PropTypes.bool
+    isActive: PropTypes.bool,
+    showTabs: PropTypes.string
 };
 
 const defaultProps = {
@@ -22,7 +23,14 @@ const defaultProps = {
     counts: {
         errors: 0,
         warnings: 0
-    }
+    },
+    changeTab: null,
+    activeTab: '',
+    label: '',
+    status: '',
+    value: '',
+    count: 0,
+    isActive: false
 };
 
 export default class ErrorTabs extends React.Component {

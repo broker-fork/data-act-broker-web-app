@@ -1,20 +1,16 @@
 /**
   * HistoryLink.jsx
   * Created by Minahm Kim 06/05/17
-  **/
+  */
 
 import React from 'react';
-import * as Icons from '../SharedComponents/icons/Icons.jsx';
+import * as Icons from '../SharedComponents/icons/Icons';
 
 const propTypes = {
     submissionId: React.PropTypes.oneOfType([
         React.PropTypes.string,
         React.PropTypes.number
     ]).isRequired
-};
-
-const defaultProps = {
-    submissionId: ''
 };
 
 export default class HistoryLink extends React.Component {
@@ -34,4 +30,3 @@ export default class HistoryLink extends React.Component {
 }
 
 HistoryLink.propTypes = propTypes;
-HistoryLink.defaultProps = defaultProps;

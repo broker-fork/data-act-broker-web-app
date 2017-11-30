@@ -1,7 +1,7 @@
 /**
   * SubmissionLink.jsx
   * Created by Kevin Li 05/16/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 
@@ -9,16 +9,17 @@ const propTypes = {
     submissionId: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
-    ]).isRequired,
+    ]),
     disabled: PropTypes.bool,
     type: PropTypes.string,
     value: PropTypes.string
 };
 
 const defaultProps = {
-    submissionId: '',
     disabled: false,
-    type: 'dabs'
+    type: 'dabs',
+    value: '',
+    submissionId: ''
 };
 
 export default class SubmissionLink extends React.Component {

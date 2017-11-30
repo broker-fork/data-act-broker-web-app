@@ -7,9 +7,9 @@ import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as uploadActions from '../../redux/actions/uploadActions.js';
+import * as uploadActions from '../../redux/actions/uploadActions';
 
-import ValidateValuesFileComponent from '../../components/validateData/validateValues/ValidateValuesFileComponent.jsx';
+import ValidateValuesFileComponent from '../../components/validateData/validateValues/ValidateValuesFileComponent';
 
 const propTypes = {
     updateItem: PropTypes.func,
@@ -17,6 +17,14 @@ const propTypes = {
     removeUploadItem: PropTypes.func,
     data: PropTypes.object,
     type: PropTypes.object
+};
+
+const defaultProps = {
+    updateItem: () => {},
+    setUploadItem: () => {},
+    removeUploadItem: () => {},
+    data: {},
+    type: {}
 };
 
 class ValidateValuesFileContainer extends React.Component {
@@ -41,7 +49,8 @@ class ValidateValuesFileContainer extends React.Component {
 
     render() {
         return (
-            <ValidateValuesFileComponent {...this.props}
+            <ValidateValuesFileComponent
+                {...this.props}
                 item={this.props.data[this.props.type.requestName]}
                 onFileChange={this.selectedFile.bind(this)}
                 removeFile={this.removeFile.bind(this)} />
@@ -50,9 +59,12 @@ class ValidateValuesFileContainer extends React.Component {
 }
 
 ValidateValuesFileContainer.propTypes = propTypes;
+ValidateValuesFileContainer.defaultProps = defaultProps;
 
 export default connect(
-    (state) => ({ submission: state.submission,
-    session: state.session }),
+    (state) => ({
+        submission: state.submission,
+        session: state.session
+    }),
     (dispatch) => bindActionCreators(uploadActions, dispatch)
 )(ValidateValuesFileContainer);

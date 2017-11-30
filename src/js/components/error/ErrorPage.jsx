@@ -1,9 +1,14 @@
 import React, { PropTypes } from 'react';
-import Navbar from '../SharedComponents/navigation/NavigationComponent.jsx';
+import Navbar from '../SharedComponents/navigation/NavigationComponent';
 
 const propTypes = {
     type: PropTypes.string,
     helpOnly: PropTypes.bool
+};
+
+const defaultProps = {
+    type: '',
+    helpOnly: false
 };
 
 export default class ErrorPage extends React.Component {
@@ -30,3 +35,4 @@ export default class ErrorPage extends React.Component {
 }
 
 ErrorPage.propTypes = propTypes;
+ErrorPage.defaultProps = defaultProps;

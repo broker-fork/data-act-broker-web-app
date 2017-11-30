@@ -1,7 +1,7 @@
 /**
   * CertifyButtons.jsx
   * Created by Kevin Li 9/7/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 
@@ -11,6 +11,14 @@ const propTypes = {
     closeModal: PropTypes.func,
     session: PropTypes.object,
     certified: PropTypes.bool
+};
+
+const defaultProps = {
+    clickedCertifyButton: null,
+    clickedCertifyCheckbox: null,
+    closeModal: null,
+    session: {},
+    certified: false
 };
 
 export default class CertifyButtons extends React.Component {
@@ -24,7 +32,10 @@ export default class CertifyButtons extends React.Component {
             <div>
                 <div className="row">
                     <div className="col-md-12 certify-check">
-                        <input type="checkbox" id="certify-check" checked={this.props.certified}
+                        <input
+                            type="checkbox"
+                            id="certify-check"
+                            checked={this.props.certified}
                             onChange={this.props.clickedCertifyCheckbox} />
                         <label htmlFor="certify-check">
                             I <b>({this.props.session.user.name.toUpperCase()})</b> certify that the data in this
@@ -34,7 +45,8 @@ export default class CertifyButtons extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col-md-6 mb-10">
-                        <button onClick={this.props.clickedCertifyButton}
+                        <button
+                            onClick={this.props.clickedCertifyButton}
                             className={"usa-da-button btn-full btn-primary" + buttonClass}
                             disabled={!this.props.certified}>
                             Publish to USAspending.gov
@@ -52,3 +64,4 @@ export default class CertifyButtons extends React.Component {
 }
 
 CertifyButtons.propTypes = propTypes;
+CertifyButtons.defaultProps = defaultProps;

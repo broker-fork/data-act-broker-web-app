@@ -1,12 +1,12 @@
 /**
   * DatePicker.jsx
   * Created by Kevin Li 7/25/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
-import * as Icons from '../../SharedComponents/icons/Icons.jsx';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import moment from 'moment';
+import * as Icons from '../../SharedComponents/icons/Icons';
 
 const propTypes = {
     onDateChange: PropTypes.func,
@@ -22,11 +22,17 @@ const propTypes = {
 
 const defaultProps = {
     type: 'startDate',
-    tabIndex: 1
+    tabIndex: 1,
+    onDateChange: null,
+    updateError: null,
+    opposite: null,
+    params: null,
+    value: null,
+    title: '',
+    disabled: false
 };
 
 export default class DatePicker extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -210,7 +216,8 @@ export default class DatePicker extends React.Component {
         return (
             <div className="generate-datepicker-wrap">
                 <div className={"generate-datepicker" + disabledClass}>
-                    <input type="text"
+                    <input
+                        type="text"
                         placeholder={this.props.title}
                         value={this.state.inputValue}
                         tabIndex={this.props.tabIndex}
@@ -218,8 +225,12 @@ export default class DatePicker extends React.Component {
                         onChange={this.handleTypedDate.bind(this)}
                         onBlur={this.handleInputBlur.bind(this)}
                         disabled={this.props.disabled} />
-                    <a href="#" onClick={this.toggleDatePicker.bind(this)} tabIndex={this.props.tabIndex + 1}
-                        className="usa-da-icon picker-icon date" aria-haspopup={"true"}>
+                    <a
+                        href="#"
+                        onClick={this.toggleDatePicker.bind(this)}
+                        tabIndex={this.props.tabIndex + 1}
+                        className="usa-da-icon picker-icon date"
+                        aria-haspopup="true">
                         <Icons.Calendar alt="Date picker" />
                     </a>
                 </div>

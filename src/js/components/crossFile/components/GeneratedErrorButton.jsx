@@ -1,10 +1,10 @@
 /**
   * GeneratedErrorButton.jsx
   * Created by Kevin Li 7/28/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
-import GeneratedFileModal from './GeneratedFileModal.jsx';
+import GeneratedFileModal from './GeneratedFileModal';
 
 const propTypes = {
     forceUpdate: PropTypes.func,
@@ -13,8 +13,14 @@ const propTypes = {
     type: PropTypes.string
 };
 
-export default class GeneratedErrorButton extends React.Component {
+const defaultProps = {
+    forceUpdate: null,
+    file: null,
+    submissionID: '',
+    type: ''
+};
 
+export default class GeneratedErrorButton extends React.Component {
     constructor(props) {
         super(props);
 
@@ -55,11 +61,16 @@ export default class GeneratedErrorButton extends React.Component {
 
         return (
             <div>
-                <div className={"usa-da-button btn-full " + buttonClass} onClick={this.showModal.bind(this)}>
+                <div
+                    className={"usa-da-button btn-full " + buttonClass}
+                    onClick={this.showModal.bind(this)}>
                     File {this.props.file.letter}: {this.props.file.name}
                 </div>
-                <GeneratedFileModal showModal={this.state.showModal} closeModal={this.closeModal.bind(this)}
-                    file={this.props.file} finishedGenerating={this.finishedGenerating.bind(this)}
+                <GeneratedFileModal
+                    showModal={this.state.showModal}
+                    closeModal={this.closeModal.bind(this)}
+                    file={this.props.file}
+                    finishedGenerating={this.finishedGenerating.bind(this)}
                     submissionID={this.props.submissionID} />
             </div>
 
@@ -68,3 +79,4 @@ export default class GeneratedErrorButton extends React.Component {
 }
 
 GeneratedErrorButton.propTypes = propTypes;
+GeneratedErrorButton.defaultProps = defaultProps;

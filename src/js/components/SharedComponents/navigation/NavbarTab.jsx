@@ -1,13 +1,13 @@
 /**
 * NavbarTab.jsx
 * Created by Kyle Fox 2/19/16
-**/
+*/
 
 import React, { PropTypes } from 'react';
 
 const propTypes = {
-    activeTabClassName: PropTypes.string.isRequired,
-    tabClass: PropTypes.string.isRequired,
+    activeTabClassName: PropTypes.string,
+    tabClass: PropTypes.string,
     name: PropTypes.string,
     comingSoon: PropTypes.bool
 };
@@ -15,7 +15,8 @@ const propTypes = {
 const defaultProps = {
     tabClass: 'landing',
     activeTabClassName: 'landing',
-    comingSoon: false
+    comingSoon: false,
+    name: ''
 };
 
 export default class NavbarTab extends React.Component {
@@ -28,7 +29,7 @@ export default class NavbarTab extends React.Component {
                 <li>
                     <a className="usa-da-header-link disabled">{this.props.name}
                         <span className={isActiveClass ? 'sr-only' : ''}>{isActiveClass ? '(current)' : ''}
-                            <div className="comingSoon"></div>
+                            <div className="comingSoon" />
                         </span>
                     </a>
                 </li>
@@ -39,7 +40,7 @@ export default class NavbarTab extends React.Component {
                 <li>
                     <a className="usa-da-header-link disabled">{this.props.name}
                         <span className={isActiveClass ? 'sr-only' : ''}>{isActiveClass ? '(current)' : ''}
-                            <div className="permissionsRequired"></div>
+                            <div className="permissionsRequired" />
                         </span>
                     </a>
                 </li>

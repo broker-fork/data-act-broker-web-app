@@ -1,13 +1,15 @@
 /**
 * SubmissionComponent.jsx
 * Created by Katie Rose 12/8/15
-**/
+*/
 
 import React, { PropTypes } from 'react';
-import FileComponent from './FileComponent.jsx';
+import FileComponent from './FileComponent';
 
 const propTypes = {
-    files: PropTypes.array.isRequired
+    files: PropTypes.array.isRequired,
+    data: PropTypes.array,
+    headers: PropTypes.array
 };
 
 const defaultProps = {
@@ -26,7 +28,8 @@ export default class SubmissionComponent extends React.Component {
             const fileVars = this.props.files[i];
 
             submissionItems.push(
-                <FileComponent key={i}
+                <FileComponent
+                    key={i}
                     fileTitle={fileVars.fileTitle}
                     fileTemplateName={fileVars.fileTemplateName}
                     requestName={fileVars.requestName} />);

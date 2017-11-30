@@ -1,10 +1,10 @@
 /**
 * FileComponent.jsx
 * Created by Kyle Fox 2/19/16
-**/
+*/
 
 import React, { PropTypes } from 'react';
-import DropZoneContainer from '../../containers/addData/DropZoneContainer.jsx';
+import DropZoneContainer from '../../containers/addData/DropZoneContainer';
 
 const propTypes = {
     fileTitle: PropTypes.string.isRequired,

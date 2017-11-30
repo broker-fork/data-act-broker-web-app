@@ -1,11 +1,11 @@
 /**
   * GenerateFileBox.jsx
   * Created by Kevin Li 7/25/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
-import * as Icons from '../../SharedComponents/icons/Icons.jsx';
-import DatePicker from './DatePicker.jsx';
+import * as Icons from '../../SharedComponents/icons/Icons';
+import DatePicker from './DatePicker';
 
 const propTypes = {
     onDateChange: PropTypes.func,
@@ -23,7 +23,13 @@ const defaultProps = {
     download: {
         show: false,
         url: '#'
-    }
+    },
+    onDateChange: null,
+    updateError: null,
+    error: null,
+    value: null,
+    datePlaceholder: '',
+    label: ''
 };
 
 export default class GenerateFileBox extends React.Component {
@@ -50,16 +56,24 @@ export default class GenerateFileBox extends React.Component {
                             {this.props.label}
                         </div>
                         <div className="date-range-wrapper">
-                            <DatePicker type="startDate" title={this.props.datePlaceholder + " Start Date"}
-                                tabIndex={this.props.startingTab} onDateChange={this.props.onDateChange}
-                                value={this.props.value.startDate} opposite={this.props.value.endDate}
+                            <DatePicker
+                                type="startDate"
+                                title={this.props.datePlaceholder + " Start Date"}
+                                tabIndex={this.props.startingTab}
+                                onDateChange={this.props.onDateChange}
+                                value={this.props.value.startDate}
+                                opposite={this.props.value.endDate}
                                 updateError={this.props.updateError} />
                             <div className="through-text">
                                 through
                             </div>
-                            <DatePicker type="endDate" title={this.props.datePlaceholder + " End Date"}
-                                tabIndex={this.props.startingTab + 4} onDateChange={this.props.onDateChange}
-                                value={this.props.value.endDate} opposite={this.props.value.startDate}
+                            <DatePicker
+                                type="endDate"
+                                title={this.props.datePlaceholder + " End Date"}
+                                tabIndex={this.props.startingTab + 4}
+                                onDateChange={this.props.onDateChange}
+                                value={this.props.value.endDate}
+                                opposite={this.props.value.startDate}
                                 updateError={this.props.updateError} />
                         </div>
                     </div>
@@ -69,7 +83,10 @@ export default class GenerateFileBox extends React.Component {
                                 <div className="download-title text-right">
                                     Download {this.props.label}
                                 </div>
-                                <a href={this.props.download.url} target="_blank" rel="noopener noreferrer"
+                                <a
+                                    href={this.props.download.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="usa-da-download pull-right">
                                     <span className="usa-da-icon usa-da-download-report"><Icons.CloudDownload />
                                     </span>Download File

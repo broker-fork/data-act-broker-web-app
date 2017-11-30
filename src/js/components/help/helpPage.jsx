@@ -1,24 +1,30 @@
 /**
  * HelpPage.jsx
  * Created by Mike Bray 4/1/16
- **/
+ */
 
 import React, { PropTypes } from 'react';
-import Navbar from '../SharedComponents/navigation/NavigationComponent.jsx';
-import HelpSidebar from './helpSidebar.jsx';
-import HelpContent from './helpContent.jsx';
-import HelpNav from './helpNav.jsx';
-import Footer from '../SharedComponents/FooterComponent.jsx';
-import Banner from '../SharedComponents/Banner.jsx';
+import Navbar from '../SharedComponents/navigation/NavigationComponent';
+import HelpSidebar from './helpSidebar';
+import HelpContent from './helpContent';
+import HelpNav from './helpNav';
+import Footer from '../SharedComponents/FooterComponent';
+import Banner from '../SharedComponents/Banner';
 
-import * as Icons from '../SharedComponents/icons/Icons.jsx';
+import * as Icons from '../SharedComponents/icons/Icons';
 
-import * as HelpHelper from '../../helpers/helpHelper.js';
+import * as HelpHelper from '../../helpers/helpHelper';
 
 const propTypes = {
     location: PropTypes.object,
     type: PropTypes.string,
     helpOnly: PropTypes.bool
+};
+
+const defaultProps = {
+    location: null,
+    type: '',
+    helpOnly: false
 };
 
 export default class HelpPage extends React.Component {
@@ -47,7 +53,7 @@ export default class HelpPage extends React.Component {
                 });
             })
             .catch((err) => {
-                console.log(err);
+                console.error(err);
             });
     }
 
@@ -60,7 +66,7 @@ export default class HelpPage extends React.Component {
                 });
             })
             .catch((err) => {
-                console.log(err);
+                console.error(err);
             });
     }
 
@@ -87,13 +93,17 @@ export default class HelpPage extends React.Component {
                     <div className="container">
                         <div className="row usa-da-help-page">
                             <div className="col-md-4">
-                                <HelpSidebar changeSections={this.state.clSections}
-                                    technicalSections={this.state.tSections} helpOnly={this.props.helpOnly}
+                                <HelpSidebar
+                                    changeSections={this.state.clSections}
+                                    technicalSections={this.state.tSections}
+                                    helpOnly={this.props.helpOnly}
                                     type={this.props.type} />
                             </div>
                             <div className="col-md-8">
-                                <HelpContent section={this.props.location.query.section}
-                                    helpOnly={this.props.helpOnly} changelog={this.state.changelog}
+                                <HelpContent
+                                    section={this.props.location.query.section}
+                                    helpOnly={this.props.helpOnly}
+                                    changelog={this.state.changelog}
                                     technical={this.state.technical} />
                             </div>
                         </div>
@@ -114,3 +124,4 @@ export default class HelpPage extends React.Component {
 }
 
 HelpPage.propTypes = propTypes;
+HelpPage.defaultProps = defaultProps;

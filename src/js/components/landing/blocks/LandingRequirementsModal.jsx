@@ -1,16 +1,20 @@
 /**
   * LandingRequirementsModal.jsx
   * Created by Kevin Li 5/17/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 import Modal from 'react-aria-modal';
 
-import * as Icons from '../../SharedComponents/icons/Icons.jsx';
-import LandingBody from './LandingRequirementsBody.jsx';
+import * as Icons from '../../SharedComponents/icons/Icons';
+import LandingBody from './LandingRequirementsBody';
 
 const propTypes = {
     type: PropTypes.string
+};
+
+const defaultProps = {
+    type: ''
 };
 
 export default class LandingRequirementsModal extends React.Component {
@@ -43,8 +47,12 @@ export default class LandingRequirementsModal extends React.Component {
         // adding this because the linter doesn't like when we just pass true
         const trueProps = true;
         return (
-            <Modal mounted={this.state.isOpen} onExit={this.closeModal.bind(this)} underlayClickExists={false}
-                verticallyCenter={trueProps} titleId="usa-da-landing-modal">
+            <Modal
+                mounted={this.state.isOpen}
+                onExit={this.closeModal.bind(this)}
+                underlayClickExists={false}
+                verticallyCenter={trueProps}
+                titleId="usa-da-landing-modal">
                 <div className="usa-da-modal-page">
                     <div id="usa-da-landing-modal" className="usa-da-landing-modal">
                         <div className="usa-da-landing-modal-close usa-da-icon usa-da-icon-times">
@@ -61,3 +69,4 @@ export default class LandingRequirementsModal extends React.Component {
 }
 
 LandingRequirementsModal.propTypes = propTypes;
+LandingRequirementsModal.defaultProps = defaultProps;

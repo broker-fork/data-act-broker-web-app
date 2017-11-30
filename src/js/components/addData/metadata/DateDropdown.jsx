@@ -1,11 +1,11 @@
 /**
   * DateDropdown.jsx
   * Created by Kevin Li 5/19/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 import moment from 'moment';
-import * as UtilHelper from '../../../helpers/util.js';
+import * as UtilHelper from '../../../helpers/util';
 
 const propTypes = {
     onChange: PropTypes.func,
@@ -15,8 +15,15 @@ const propTypes = {
     hasError: PropTypes.bool
 };
 
-export default class DateDropdown extends React.Component {
+const defaultProps = {
+    onChange: null,
+    startEndType: '',
+    type: '',
+    value: '',
+    hasError: false
+};
 
+export default class DateDropdown extends React.Component {
     constructor(props) {
         super(props);
 
@@ -123,7 +130,9 @@ export default class DateDropdown extends React.Component {
         }
 
         return (
-            <select className={"usa-da-date-dropdown" + errorClass} onChange={this.dateChanged.bind(this)}
+            <select
+                className={"usa-da-date-dropdown" + errorClass}
+                onChange={this.dateChanged.bind(this)}
                 value={value}>
                 {dates}
             </select>
@@ -132,3 +141,4 @@ export default class DateDropdown extends React.Component {
 }
 
 DateDropdown.propTypes = propTypes;
+DateDropdown.defaultProps = defaultProps;

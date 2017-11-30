@@ -1,19 +1,24 @@
 /**
  * practicesProceduresPage.jsx
  * Created by Emily Gullo 9/2/16
- **/
+ */
 
 import React, { PropTypes } from 'react';
-import Navbar from '../SharedComponents/navigation/NavigationComponent.jsx';
-import PracticesProceduresContent from './practicesProceduresContent.jsx';
-import Banner from '../SharedComponents/Banner.jsx';
-import Footer from '../SharedComponents/FooterComponent.jsx';
+import Navbar from '../SharedComponents/navigation/NavigationComponent';
+import PracticesProceduresContent from './practicesProceduresContent';
+import Banner from '../SharedComponents/Banner';
+import Footer from '../SharedComponents/FooterComponent';
 
-import * as Icons from '../SharedComponents/icons/Icons.jsx';
+import * as Icons from '../SharedComponents/icons/Icons';
 
 const propTypes = {
     type: PropTypes.string,
     helpOnly: PropTypes.bool
+};
+
+const defaultProps = {
+    type: '',
+    helpOnly: false
 };
 
 export default class PracticesProceduresPage extends React.Component {
@@ -64,3 +69,4 @@ export default class PracticesProceduresPage extends React.Component {
 }
 
 PracticesProceduresPage.propTypes = propTypes;
+PracticesProceduresPage.defaultProps = defaultProps;

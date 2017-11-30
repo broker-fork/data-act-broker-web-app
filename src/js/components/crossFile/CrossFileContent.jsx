@@ -1,12 +1,12 @@
 /**
   * CrossFileContent.jsx
   * Created by Kevin Li 6/14/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
-import CrossFileItem from './CrossFileItem.jsx';
-import CrossFileOverlay from './CrossFileOverlay.jsx';
+import CrossFileItem from './CrossFileItem';
+import CrossFileOverlay from './CrossFileOverlay';
 
 const propTypes = {
     reloadData: PropTypes.func,
@@ -14,8 +14,13 @@ const propTypes = {
     submission: PropTypes.object
 };
 
-export default class CrossFileContent extends React.Component {
+const defaultProps = {
+    reloadData: null,
+    uploadFiles: null,
+    submission: null
+};
 
+export default class CrossFileContent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -84,7 +89,12 @@ export default class CrossFileContent extends React.Component {
                 warnings
             };
 
-            items.push(<CrossFileItem key={i} status={status} meta={pairMeta} counts={counts} {...this.props}
+            items.push(<CrossFileItem
+                key={i}
+                status={status}
+                meta={pairMeta}
+                counts={counts}
+                {...this.props}
                 forceUpdate={this.props.reloadData} />);
             i += 1;
         });
@@ -109,8 +119,10 @@ export default class CrossFileContent extends React.Component {
                     <div className={"usa-da-cross-file" + loadingClass}>
                         <div className="row usa-da-submission-instructions">
                             <div className="col-md-12">
-                                <p>Cross-file validation will now be performed on some of your files. As before, if any
-                                errors are found they will be displayed below.</p>
+                                <p>
+                                    Cross-file validation will now be performed on some of your files. As before, if any
+                                    errors are found they will be displayed below.
+                                </p>
                             </div>
                         </div>
 
@@ -118,7 +130,10 @@ export default class CrossFileContent extends React.Component {
 
                     </div>
                 </div>
-                <CrossFileOverlay {...this.props} mode={this.state.overlay} loading={isLoading}
+                <CrossFileOverlay
+                    {...this.props}
+                    mode={this.state.overlay}
+                    loading={isLoading}
                     uploadFiles={this.props.uploadFiles} />
             </div>
         );
@@ -126,3 +141,4 @@ export default class CrossFileContent extends React.Component {
 }
 
 CrossFileContent.propTypes = propTypes;
+CrossFileContent.defaultProps = defaultProps;

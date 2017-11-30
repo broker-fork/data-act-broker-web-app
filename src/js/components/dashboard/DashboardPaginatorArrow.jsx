@@ -1,11 +1,11 @@
 /**
   * DashboardPaginatorArrowv.jsx
   * Created by Kevin Li 10/31/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 
-import * as Icons from '../SharedComponents/icons/Icons.jsx';
+import * as Icons from '../SharedComponents/icons/Icons';
 
 const propTypes = {
     moveDirection: PropTypes.func,
@@ -13,7 +13,8 @@ const propTypes = {
 };
 
 const defaultProps = {
-    direction: 'left'
+    direction: 'left',
+    moveDirection: null
 };
 
 export default class DashboardPaginatorArrow extends React.Component {

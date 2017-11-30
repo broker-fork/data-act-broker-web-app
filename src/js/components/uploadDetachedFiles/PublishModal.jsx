@@ -1,17 +1,26 @@
 /**
   * PublishModal.jsx
   * Created by Minahm Kim 8/3/17
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 import Modal from 'react-aria-modal';
-import * as Icons from '../SharedComponents/icons/Icons.jsx';
+import * as Icons from '../SharedComponents/icons/Icons';
 
 const propTypes = {
     closeModal: PropTypes.func,
     submit: PropTypes.func,
     rows: PropTypes.object,
-    isOpen: PropTypes.bool
+    isOpen: PropTypes.bool,
+    published: PropTypes.bool
+};
+
+const defaultProps = {
+    closeModal: () => {},
+    submit: () => {},
+    rows: {},
+    isOpen: false,
+    published: false
 };
 
 export default class PublishModal extends React.Component {
@@ -58,17 +67,26 @@ export default class PublishModal extends React.Component {
     render() {
         const publishable = this.state.rows.valid_rows !== 0;
 
-        let message = (<p>This will publish the {this.state.rows.valid_rows} data rows that have passed validation out
-            of a total of {this.state.rows.total_rows} data rows in your FABS file</p>);
+        let message = (
+            <p>
+                This will publish the {this.state.rows.valid_rows} data rows that have passed validation out
+                of a total of {this.state.rows.total_rows} data rows in your FABS file
+            </p>);
 
-        let action = (<button id="publish-button" onClick={this.props.submit.bind(this)}
-            className="us-da-button col-sm-6">Publish</button>);
+        let action = (
+            <button
+                id="publish-button"
+                onClick={this.props.submit.bind(this)}
+                className="us-da-button col-sm-6">
+                Publish
+            </button>);
 
         if (!publishable) {
-            message = (<p>
-                Your file cannot be published because none of your records passed validation. Please correct your file
-                and resubmit it.
-            </p>);
+            message = (
+                <p>
+                    Your file cannot be published because none of your records passed validation. Please correct your
+                    file and resubmit it.
+                </p>);
             action = <button id="publish-button" className="us-da-disabled-button col-sm-6">No Valid Rows</button>;
         }
 
@@ -86,11 +104,16 @@ export default class PublishModal extends React.Component {
         const trueProps = true;
 
         return (
-            <Modal mounted={this.props.isOpen} onExit={this.closeModal.bind(this)}
+            <Modal
+                mounted={this.props.isOpen}
+                onExit={this.closeModal.bind(this)}
                 underlayClickExits={this.state.closeable}
-                verticallyCenter={trueProps} titleId="usa-da-certify-modal">
+                verticallyCenter={trueProps}
+                titleId="usa-da-certify-modal">
                 <div className="usa-da-modal-page">
-                    <div id="usa-da-certify-modal" className="usa-da-certify-modal">
+                    <div
+                        id="usa-da-certify-modal"
+                        className="usa-da-certify-modal">
                         <div className={"usa-da-certify-modal-close usa-da-icon usa-da-icon-times" + hideClose}>
                             <a href="#" onClick={this.closeModal.bind(this)}> <Icons.Times /> </a>
                         </div>
@@ -98,21 +121,28 @@ export default class PublishModal extends React.Component {
                         <div className="usa-da-certify-modal-content">
                             <div className="row">
                                 <div className="col-md-12 title-field">
-                                    <h6>Are you sure you want to publish your data to <a
-                                        href="http://www.usaspending.gov" target="_blank">USAspending.gov</a>?</h6>
+                                    <h6>Are you sure you want to publish your data to
+                                        <a
+                                            href="http://www.usaspending.gov"
+                                            rel="noopener noreferrer"
+                                            target="_blank">
+                                            USAspending.gov
+                                        </a>?
+                                    </h6>
                                     {message}
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-md-12">
-
-                                </div>
+                                <div className="col-md-12" />
                             </div>
                             <div className="row">
                                 {action}
                                 <div className="col-sm-6">
-                                    <button onClick={this.closeModal.bind(this)}
-                                        className={'usa-da-button btn-warning btn-full' + hideClose}>Cancel</button>
+                                    <button
+                                        onClick={this.closeModal.bind(this)}
+                                        className={'usa-da-button btn-warning btn-full' + hideClose}>
+                                        Cancel
+                                    </button>
                                 </div>
                             </div>
                             {error}
@@ -125,3 +155,4 @@ export default class PublishModal extends React.Component {
 }
 
 PublishModal.propTypes = propTypes;
+PublishModal.defaultProps = defaultProps;

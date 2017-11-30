@@ -1,12 +1,12 @@
 /**
  * PracticeProceduresContent.jsx
  * Created by Emily Gullo 9/2/2016
- **/
+ */
 
 import React, { PropTypes } from 'react';
 import $ from 'jquery';
-import { generateProtectedUrls } from '../../helpers/util.js';
-import DaimsMessage from './daimsMessage.jsx';
+import { generateProtectedUrls } from '../../helpers/util';
+import DaimsMessage from './daimsMessage';
 
 const propTypes = {
     history: PropTypes.object,
@@ -14,8 +14,13 @@ const propTypes = {
     helpOnly: PropTypes.bool
 };
 
-export default class PracticesProceduresContent extends React.Component {
+const defaultProps = {
+    history: null,
+    type: '',
+    helpOnly: false
+};
 
+export default class PracticesProceduresContent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -81,8 +86,10 @@ export default class PracticesProceduresContent extends React.Component {
                             System (FPDS-NG) on a daily basis.
                         </li>
                     </ul>
-                    <h5>2. Twice monthly award submission - Financial Assistance (Grants, Loans, Insurance, and Other
-                    Financial Assistance)</h5>
+                    <h5>
+                        2. Twice monthly award submission - Financial Assistance (Grants, Loans, Insurance, and Other
+                        Financial Assistance)
+                    </h5>
                     <ul>
                         <li>
                             2.1 Agencies will submit to the updated Award Submission Portal (ASP) at least twice
@@ -283,3 +290,4 @@ export default class PracticesProceduresContent extends React.Component {
 }
 
 PracticesProceduresContent.propTypes = propTypes;
+PracticesProceduresContent.defaultProps = defaultProps;

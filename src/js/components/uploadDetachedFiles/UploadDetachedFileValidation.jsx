@@ -1,7 +1,7 @@
 /**
 * UploadDetachedFileValidation.jsx
 * Created by Minahm Kim
-**/
+*/
 
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
@@ -9,17 +9,17 @@ import React, { PropTypes } from "react";
 import moment from "moment";
 import { connect } from "react-redux";
 
-import ValidateValuesFileContainer from "../../containers/validateData/ValidateValuesFileContainer.jsx";
-import ValidateDataFileContainer from "../../containers/validateData/ValidateDataFileContainer.jsx";
-import PublishModal from "./PublishModal.jsx";
-import Banner from "../SharedComponents/Banner.jsx";
-import UploadDetachedFilesError from "./UploadDetachedFilesError.jsx";
+import ValidateValuesFileContainer from "../../containers/validateData/ValidateValuesFileContainer";
+import ValidateDataFileContainer from "../../containers/validateData/ValidateDataFileContainer";
+import PublishModal from "./PublishModal";
+import Banner from "../SharedComponents/Banner";
+import UploadDetachedFilesError from "./UploadDetachedFilesError";
 
-import * as UploadHelper from "../../helpers/uploadHelper.js";
-import * as GenerateFilesHelper from "../../helpers/generateFilesHelper.js";
-import * as PermissionsHelper from "../../helpers/permissionsHelper.js";
-import * as ReviewHelper from "../../helpers/reviewHelper.js";
-import { kGlobalConstants } from "../../GlobalConstants.js";
+import * as UploadHelper from "../../helpers/uploadHelper";
+import * as GenerateFilesHelper from "../../helpers/generateFilesHelper";
+import * as PermissionsHelper from "../../helpers/permissionsHelper";
+import * as ReviewHelper from "../../helpers/reviewHelper";
+import { kGlobalConstants } from "../../GlobalConstants";
 
 const propTypes = {
     setSubmissionState: PropTypes.func,
@@ -28,6 +28,15 @@ const propTypes = {
     route: PropTypes.object,
     session: PropTypes.object,
     submission: PropTypes.object
+};
+
+const defaultProps = {
+    setSubmissionState: () => {},
+    item: {},
+    params: {},
+    route: {},
+    session: {},
+    submission: {}
 };
 
 const timerDuration = 5;
@@ -224,14 +233,14 @@ class UploadDetachedFileValidation extends React.Component {
 
     validateSubmission(item) {
         ReviewHelper.validateDetachedSubmission(this.props.params.submissionID)
-                .then((response) => {
-                    this.setState({
-                        detachedAward: item,
-                        validationFinished: true,
-                        headerErrors: false,
-                        jobResults: response
-                    });
+            .then((response) => {
+                this.setState({
+                    detachedAward: item,
+                    validationFinished: true,
+                    headerErrors: false,
+                    jobResults: response
                 });
+            });
     }
 
     parseJobStates(data) {
@@ -366,17 +375,18 @@ class UploadDetachedFileValidation extends React.Component {
         }
 
         if (this.state.agency !== "" && this.state.rep_start !== "" && this.state.rep_end !== "") {
-            headerDate = (<div className="col-md-2 ">
-                <div className = "header-box">
-                    <span>
-                        Agency: {this.state.agency}
-                    </span>
-                    <br/>
-                    <span>
-                        Last Modified: {updated}
-                    </span>
-                </div>
-            </div>);
+            headerDate = (
+                <div className="col-md-2 ">
+                    <div className="header-box">
+                        <span>
+                            Agency: {this.state.agency}
+                        </span>
+                        <br />
+                        <span>
+                            Last Modified: {updated}
+                        </span>
+                    </div>
+                </div>);
         }
 
         const type = {
@@ -389,7 +399,9 @@ class UploadDetachedFileValidation extends React.Component {
         const fileData = this.state.jobResults[type.requestName];
         const status = fileData.job_status;
         let errorMessage = null;
-        validationBox = (<ValidateDataFileContainer type={type} data={this.state.jobResults}
+        validationBox = (<ValidateDataFileContainer
+            type={type}
+            data={this.state.jobResults}
             setUploadItem={this.uploadFile.bind(this)}
             updateItem={this.uploadFile.bind(this)}
             publishing={this.state.published === "publishing"}
@@ -397,7 +409,9 @@ class UploadDetachedFileValidation extends React.Component {
         if (fileData.file_status === "complete" && this.state.validationFinished &&
             this.state.published !== "publishing") {
             if (status !== "invalid" || fileData.file_status === "complete") {
-                validationBox = (<ValidateValuesFileContainer type={type} data={this.state.jobResults}
+                validationBox = (<ValidateValuesFileContainer
+                    type={type}
+                    data={this.state.jobResults}
                     setUploadItem={this.uploadFile.bind(this)}
                     updateItem={this.uploadFile.bind(this)}
                     published={this.state.published}
@@ -405,49 +419,79 @@ class UploadDetachedFileValidation extends React.Component {
             }
 
             if (this.state.showSuccess) {
-                errorMessage = (<UploadDetachedFilesError errorCode={this.state.error} type="success"
+                errorMessage = (<UploadDetachedFilesError
+                    errorCode={this.state.error}
+                    type="success"
                     message={this.state.error_message} />);
             }
             if (this.state.published === "published") {
                 // This submission is already published and cannot be republished
                 if (this.state.fabs_meta.published_file === null) {
-                    validationButton = (<button className="pull-right col-xs-3 us-da-disabled-button"
-                        disabled>File Published:<span className="plain">
-                        {this.state.fabs_meta.valid_rows} rows published at {this.state.fabs_meta.publish_date}</span>
-                    </button>);
+                    validationButton = (
+                        <button
+                            className="pull-right col-xs-3 us-da-disabled-button"
+                            disabled>File Published:
+                            <span className="plain">
+                                {this.state.fabs_meta.valid_rows} rows published at {this.state.fabs_meta.publish_date}
+                            </span>
+                        </button>);
                 }
                 else {
-                    downloadButton = (<button className="pull-right col-xs-3 us-da-button"
-                        onClick={this.clickedReport.bind(this, this.props.item)}
-                        download={this.state.fabs_meta.published_file}
-                        rel="noopener noreferrer">File Published:<span className="plain">
-                        {this.state.fabs_meta.valid_rows} rows published at {this.state.fabs_meta.publish_date}</span>
-                    </button>);
+                    downloadButton = (
+                        <button
+                            className="pull-right col-xs-3 us-da-button"
+                            onClick={this.clickedReport.bind(this, this.props.item)}
+                            download={this.state.fabs_meta.published_file}
+                            rel="noopener noreferrer">File Published:
+                            <span className="plain">
+                                {this.state.fabs_meta.valid_rows} rows published at {this.state.fabs_meta.publish_date}
+                            </span>
+                        </button>);
                 }
             }
             else if (PermissionsHelper.checkFabsPermissions(this.props.session)) {
                 // User has permissions to publish this unpublished submission
-                validationButton = (<button className="pull-right col-xs-3 us-da-button"
-                    onClick={this.openModal.bind(this)}>Publish</button>);
-                revalidateButton = (<button className="pull-right col-xs-3 us-da-button revalidate-button"
-                    onClick={this.startRevalidation.bind(this)}>Revalidate</button>);
+                validationButton = (
+                    <button
+                        className="pull-right col-xs-3 us-da-button"
+                        onClick={this.openModal.bind(this)}>
+                        Publish
+                    </button>);
+                revalidateButton = (
+                    <button
+                        className="pull-right col-xs-3 us-da-button revalidate-button"
+                        onClick={this.startRevalidation.bind(this)}>
+                        Revalidate
+                    </button>);
             }
             else {
                 // User does not have permissions to publish
-                validationButton = (<button className="pull-right col-xs-3 us-da-disabled-button"
-                    disabled>You do not have permissions to publish</button>);
+                validationButton = (
+                    <button
+                        className="pull-right col-xs-3 us-da-disabled-button"
+                        disabled>
+                        You do not have permissions to publish
+                    </button>);
             }
         }
 
         if (this.state.published === "publishing" && this.state.error !== 0) {
-            errorMessage = (<UploadDetachedFilesError errorCode={this.state.error} type="error"
+            errorMessage = (<UploadDetachedFilesError
+                errorCode={this.state.error}
+                type="error"
                 message={this.state.error_message} />);
             validationButton = null;
-            revalidateButton = (<button className="pull-right col-xs-3 us-da-button"
-                onClick={this.startRevalidation.bind(this)}>Revalidate</button>);
+            revalidateButton = (
+                <button
+                    className="pull-right col-xs-3 us-da-button"
+                    onClick={this.startRevalidation.bind(this)}>
+                    Revalidate
+                </button>);
         }
         else if (this.state.published === "unpublished" && this.state.error !== 0) {
-            errorMessage = (<UploadDetachedFilesError errorCode={this.state.error} type="error"
+            errorMessage = (<UploadDetachedFilesError
+                errorCode={this.state.error}
+                type="error"
                 message={this.state.error_message} />);
             validationButton = null;
             revalidateButton = null;
@@ -469,17 +513,21 @@ class UploadDetachedFileValidation extends React.Component {
                 </div>
                 <Banner type="fabs" />
                 <div className="container">
-                    <div className = "col-xs-12 mt-60 mb-60">
-                        <div className = "validation-holder">
+                    <div className="col-xs-12 mt-60 mb-60">
+                        <div className="validation-holder">
 
-                            <ReactCSSTransitionGroup transitionName="usa-da-meta-fade" transitionEnterTimeout={600}
+                            <ReactCSSTransitionGroup
+                                transitionName="usa-da-meta-fade"
+                                transitionEnterTimeout={600}
                                 transitionLeaveTimeout={200}>
                                 {validationBox}
                             </ReactCSSTransitionGroup>
 
                             {errorMessage}
 
-                            <ReactCSSTransitionGroup transitionName="usa-da-meta-fade" transitionEnterTimeout={600}
+                            <ReactCSSTransitionGroup
+                                transitionName="usa-da-meta-fade"
+                                transitionEnterTimeout={600}
                                 transitionLeaveTimeout={200}>
                                 {validationButton}
                                 {revalidateButton}
@@ -488,15 +536,20 @@ class UploadDetachedFileValidation extends React.Component {
                         </div>
                     </div>
                 </div>
-                <PublishModal rows={this.state.fabs_meta} submit={this.submitFabs.bind(this)}
-                    submissionID={this.state.submissionID} closeModal={this.closeModal.bind(this)}
-                    isOpen={this.state.showPublish} published={this.state.published} />
+                <PublishModal
+                    rows={this.state.fabs_meta}
+                    submit={this.submitFabs.bind(this)}
+                    submissionID={this.state.submissionID}
+                    closeModal={this.closeModal.bind(this)}
+                    isOpen={this.state.showPublish}
+                    published={this.state.published} />
             </div>
         );
     }
 }
 
 UploadDetachedFileValidation.propTypes = propTypes;
+UploadDetachedFileValidation.defaultProps = defaultProps;
 
 export default connect(
     (state) => ({ session: state.session })

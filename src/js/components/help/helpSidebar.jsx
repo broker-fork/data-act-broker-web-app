@@ -1,10 +1,10 @@
 /**
  * HelpSidebar.jsx
  * Created by Mike Bray 4/1/16
- **/
+ */
 
 import React, { PropTypes } from 'react';
-import HelpSidebarItem from './helpSidebarItem.jsx';
+import HelpSidebarItem from './helpSidebarItem';
 
 const propTypes = {
     changeSections: PropTypes.array,
@@ -13,29 +13,42 @@ const propTypes = {
     helpOnly: PropTypes.bool
 };
 
-export default class HelpSidebar extends React.Component {
+const defaultProps = {
+    changeSections: [],
+    technicalSections: [],
+    type: '',
+    helpOnly: false
+};
 
+export default class HelpSidebar extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
         const clSectionList = this.props.changeSections.map((section, index) => {
-            return (<HelpSidebarItem key={index} sectionName={section.name} sectionId={section.link}
+            return (<HelpSidebarItem
+                key={index}
+                sectionName={section.name}
+                sectionId={section.link}
                 type={this.props.type} />);
         });
 
         const tSectionList = this.props.technicalSections.map((section, index) => {
-            return (<HelpSidebarItem key={index} sectionName={section.name} sectionId={section.link}
+            return (<HelpSidebarItem
+                key={index}
+                sectionName={section.name}
+                sectionId={section.link}
                 type={this.props.type} />);
         });
 
         let membership = null;
         if (this.props.helpOnly) {
-            membership =
-                (<li>
+            membership = (
+                <li>
                     <a href="/#/help?section=agencyAccess">Request Agency Access</a>
-                </li>);
+                </li>
+            );
         }
 
         const help = this.props.type === 'fabs' ? "/#/FABSHelp" : '/#/help';
@@ -81,3 +94,4 @@ export default class HelpSidebar extends React.Component {
 }
 
 HelpSidebar.propTypes = propTypes;
+HelpSidebar.defaultProps = defaultProps;

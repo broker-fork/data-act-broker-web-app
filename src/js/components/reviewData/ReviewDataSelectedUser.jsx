@@ -5,11 +5,16 @@
 
 import React, { PropTypes } from 'react';
 
-import * as Icons from '../SharedComponents/icons/Icons.jsx';
+import * as Icons from '../SharedComponents/icons/Icons';
 
 const propTypes = {
     deselectUser: PropTypes.func,
     user: PropTypes.object
+};
+
+const defaultProps = {
+    deselectUser: null,
+    user: null
 };
 
 export default class ReviewDataSelectedUser extends React.Component {
@@ -32,3 +37,4 @@ export default class ReviewDataSelectedUser extends React.Component {
 }
 
 ReviewDataSelectedUser.propTypes = propTypes;
+ReviewDataSelectedUser.defaultProps = defaultProps;

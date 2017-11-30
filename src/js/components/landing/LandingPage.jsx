@@ -1,15 +1,19 @@
 /**
 * LandingPage.jsx
 * Created by Katie Rose 12/7/15
-**/
+*/
 
 import React, { PropTypes } from 'react';
-import Navbar from '../SharedComponents/navigation/NavigationComponent.jsx';
-import LandingContentContainer from '../../containers/landing/LandingContentContainer.jsx';
-import Footer from '../SharedComponents/FooterComponent.jsx';
+import Navbar from '../SharedComponents/navigation/NavigationComponent';
+import LandingContentContainer from '../../containers/landing/LandingContentContainer';
+import Footer from '../SharedComponents/FooterComponent';
 
 const propTypes = {
     route: PropTypes.object
+};
+
+const defaultProps = {
+    route: {}
 };
 
 export default class LandingPage extends React.Component {
@@ -41,7 +45,7 @@ export default class LandingPage extends React.Component {
                     <div className="usa-da-landing-page">
                         <div className="usa-da-page-content">
                             <Navbar activeTab={activeTab} type={this.state.type} />
-                            <LandingContentContainer type={this.state.type}/>
+                            <LandingContentContainer type={this.state.type} />
                         </div>
                     </div>
                 </div>
@@ -52,3 +56,4 @@ export default class LandingPage extends React.Component {
 }
 
 LandingPage.propTypes = propTypes;
+LandingPage.defaultProps = defaultProps;

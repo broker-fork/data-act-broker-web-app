@@ -1,16 +1,16 @@
 /**
  * ValidateValuesErrorReport.jsx
  * Created by Kevin Li 4/4/2016
- **/
+ */
 
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
-import ScrollableTable from '../../SharedComponents/table/ScrollableTable.jsx';
+import ScrollableTable from '../../SharedComponents/table/ScrollableTable';
 
-import ValidateValuesTreemap from './ValidateValuesTreemap.jsx';
-import * as Icons from '../../SharedComponents/icons/Icons.jsx';
+import ValidateValuesTreemap from './ValidateValuesTreemap';
+import * as Icons from '../../SharedComponents/icons/Icons';
 
-import * as ReviewHelper from '../../../helpers/reviewHelper.js';
+import * as ReviewHelper from '../../../helpers/reviewHelper';
 
 const propTypes = {
     colors: PropTypes.object,
@@ -23,7 +23,13 @@ const propTypes = {
 };
 
 const defaultProps = {
-    dataKey: 'error_data'
+    colors: {},
+    data: {},
+    dataKey: 'error_data',
+    fileType: '',
+    name: '',
+    reportType: '',
+    submission: ''
 };
 
 export default class ValidateValuesErrorReport extends React.Component {
@@ -79,8 +85,12 @@ export default class ValidateValuesErrorReport extends React.Component {
 
         // sort the data
         const sortedRows = this.sortData(rows);
-        table = (<ScrollableTable headers={headers} data={sortedRows} onSort={this.sortTable.bind(this)}
-            cellClasses={this.state.cellClasses} headerClasses={this.state.headerClasses} />);
+        table = (<ScrollableTable
+            headers={headers}
+            data={sortedRows}
+            onSort={this.sortTable.bind(this)}
+            cellClasses={this.state.cellClasses}
+            headerClasses={this.state.headerClasses} />);
         return table;
     }
 
@@ -126,7 +136,7 @@ export default class ValidateValuesErrorReport extends React.Component {
                 this.setState({
                     signInProgress: false
                 });
-                console.log(err);
+                console.error(err);
             });
     }
 
@@ -164,7 +174,9 @@ export default class ValidateValuesErrorReport extends React.Component {
                             <h6>{this.props.name}s</h6>
                         </div>
                         <div className="col-md-3">
-                            <div className="usa-da-download pull-right" onClick={this.clickedReport.bind(this)}>
+                            <div
+                                className="usa-da-download pull-right"
+                                onClick={this.clickedReport.bind(this)}>
                                 <span className="usa-da-icon usa-da-download-report"><Icons.CloudDownload /></span>
                                 {reportLinkText}
                             </div>
@@ -172,7 +184,9 @@ export default class ValidateValuesErrorReport extends React.Component {
                         <div className="col-md-12">
                             {this.state.table}
                             <div className="mt-20">
-                                <ValidateValuesTreemap data={this.props.data[this.props.dataKey]} type="error"
+                                <ValidateValuesTreemap
+                                    data={this.props.data[this.props.dataKey]}
+                                    type="error"
                                     colors={this.props.colors} />
                             </div>
                         </div>

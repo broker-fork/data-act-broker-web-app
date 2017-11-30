@@ -1,19 +1,22 @@
 /**
   * ComparisonTable.jsx
   * Created by Kevin Li 6/15/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
-import ScrollableTable from '../../SharedComponents/table/ScrollableTable.jsx';
-import * as ReviewHelper from '../../../helpers/reviewHelper.js';
+import ScrollableTable from '../../SharedComponents/table/ScrollableTable';
+import * as ReviewHelper from '../../../helpers/reviewHelper';
 
 const propTypes = {
     data: PropTypes.array
 };
 
-export default class ComparisonTable extends React.Component {
+const defaultProps = {
+    data: []
+};
 
+export default class ComparisonTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -69,3 +72,4 @@ export default class ComparisonTable extends React.Component {
 }
 
 ComparisonTable.propTypes = propTypes;
+ComparisonTable.defaultProps = defaultProps;

@@ -1,19 +1,26 @@
 /**
 * LoginPanel.jsx
 * Created by Kyle Fox 2/19/16
-**/
+*/
 
 import React, { PropTypes } from 'react';
-import Username from './Username.jsx';
-import Password from './Password.jsx';
-import SignInButton from './SignInButton.jsx';
-import ErrorMessage from '../SharedComponents/ErrorMessage.jsx';
+import Username from './Username';
+import Password from './Password';
+import SignInButton from './SignInButton';
+import ErrorMessage from '../SharedComponents/ErrorMessage';
 
 const propTypes = {
     performLogin: PropTypes.func,
     session: PropTypes.object,
     errorMessage: PropTypes.string,
     loading: PropTypes.bool
+};
+
+const defaultProps = {
+    performLogin: null,
+    session: null,
+    errorMessage: '',
+    loading: false
 };
 
 export default class LoginPanel extends React.Component {
@@ -72,7 +79,9 @@ export default class LoginPanel extends React.Component {
                     </div>
                     <div className="row">
                         <div className="col-sm-12 col-md-offset-4 col-md-8">
-                            <SignInButton onClick={this.loginClicked.bind(this)} buttonText="Sign In"
+                            <SignInButton
+                                onClick={this.loginClicked.bind(this)}
+                                buttonText="Sign In"
                                 disabled={this.props.loading} />
                         </div>
                     </div>
@@ -88,3 +97,4 @@ export default class LoginPanel extends React.Component {
 }
 
 LoginPanel.propTypes = propTypes;
+LoginPanel.defaultProps = defaultProps;

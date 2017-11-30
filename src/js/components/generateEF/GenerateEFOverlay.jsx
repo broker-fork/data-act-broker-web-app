@@ -1,15 +1,15 @@
 /**
   * GenerateEFOverlay.jsx
   * Created by Kevin Li 8/24/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
-import * as Icons from '../SharedComponents/icons/Icons.jsx';
-import CommonOverlay from '../SharedComponents/overlays/CommonOverlay.jsx';
-import LoadingBauble from '../SharedComponents/overlays/LoadingBauble.jsx';
+import * as Icons from '../SharedComponents/icons/Icons';
+import CommonOverlay from '../SharedComponents/overlays/CommonOverlay';
+import LoadingBauble from '../SharedComponents/overlays/LoadingBauble';
 
-import * as PermissionsHelper from '../../helpers/permissionsHelper.js';
-import * as ReviewHelper from '../../helpers/reviewHelper.js';
+import * as PermissionsHelper from '../../helpers/permissionsHelper';
+import * as ReviewHelper from '../../helpers/reviewHelper';
 
 const propTypes = {
     generateFiles: PropTypes.func,
@@ -18,6 +18,15 @@ const propTypes = {
     submissionID: PropTypes.string,
     hasErrors: PropTypes.bool,
     isReady: PropTypes.bool
+};
+
+const defaultProps = {
+    generateFiles: null,
+    nextPage: null,
+    session: null,
+    submissionID: '',
+    hasErrors: false,
+    isReady: false
 };
 
 export default class GenerateEFOverlay extends React.Component {
@@ -41,7 +50,7 @@ export default class GenerateEFOverlay extends React.Component {
                     }
                 })
                 .catch((error) => {
-                    console.log(error);
+                    console.error(error);
                 });
         }
     }
@@ -109,10 +118,18 @@ export default class GenerateEFOverlay extends React.Component {
                 icon={icon}
                 iconClass={iconClass}>
                 <div className="usa-da-btn-bg">
-                    <button className={"usa-da-button" + buttonClass} disabled={buttonDisabled}
-                        onClick={this.clickedGenerate.bind(this)}>Regenerate Files</button>
-                    <button className={"usa-da-button usa-da-validation-overlay-review " + nextClass}
-                        disabled={nextDisabled} onClick={this.clickedNext.bind(this)}>Next</button>
+                    <button
+                        className={"usa-da-button" + buttonClass}
+                        disabled={buttonDisabled}
+                        onClick={this.clickedGenerate.bind(this)}>
+                        Regenerate Files
+                    </button>
+                    <button
+                        className={"usa-da-button usa-da-validation-overlay-review " + nextClass}
+                        disabled={nextDisabled}
+                        onClick={this.clickedNext.bind(this)}>
+                        Next
+                    </button>
                 </div>
             </CommonOverlay>
         );
@@ -120,3 +137,4 @@ export default class GenerateEFOverlay extends React.Component {
 }
 
 GenerateEFOverlay.propTypes = propTypes;
+GenerateEFOverlay.defaultProps = defaultProps;

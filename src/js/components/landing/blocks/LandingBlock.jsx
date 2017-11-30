@@ -1,7 +1,7 @@
 /**
   * LandingBlock.jsx
   * Created by Kevin Li 5/17/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 
@@ -17,6 +17,8 @@ const propTypes = {
 };
 
 const defaultProps = {
+    children: null,
+    icon: null,
     text: '',
     buttonText: '',
     url: '#/',
@@ -39,7 +41,9 @@ export default class LandingBlock extends React.Component {
                     </div>
                     <div className="usa-da-landing-block-bottom">
                         <div className="usa-da-landing-block-button">
-                            <a className="usa-da-button btn-primary btn-lg btn-full" href={this.props.url}
+                            <a
+                                className="usa-da-button btn-primary btn-lg btn-full"
+                                href={this.props.url}
                                 disabled={this.props.disabled}>
                                 {this.props.buttonText}
                             </a>

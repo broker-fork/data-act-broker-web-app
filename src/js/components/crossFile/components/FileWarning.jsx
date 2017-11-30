@@ -1,11 +1,11 @@
 /**
   * FileWarning.jsx
   * Created by Kevin Li 6/28/16
-  **/
+  */
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
-import * as ReviewHelper from '../../../helpers/reviewHelper.js';
-import * as Icons from '../../SharedComponents/icons/Icons.jsx';
+import * as ReviewHelper from '../../../helpers/reviewHelper';
+import * as Icons from '../../SharedComponents/icons/Icons';
 
 const propTypes = {
     meta: PropTypes.object,
@@ -14,7 +14,9 @@ const propTypes = {
 };
 
 const defaultProps = {
-    files: []
+    files: [],
+    meta: null,
+    submission: null
 };
 
 export default class FileWarning extends React.Component {

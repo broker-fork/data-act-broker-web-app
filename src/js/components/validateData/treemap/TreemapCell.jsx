@@ -19,12 +19,18 @@ const propTypes = {
 };
 
 const defaultProps = {
+    clickedItem: () => {},
+    colors: {},
+    cellColor: '',
     title: 'Unspecified',
+    height: 0,
+    width: 0,
+    x: 0,
+    y: 0,
     active: false
 };
 
 export default class TreemapCell extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -70,8 +76,14 @@ export default class TreemapCell extends React.Component {
         }
 
         return (
-            <div className="usa-da-treemap-cell" style={style} onMouseOver={this.mouseOver.bind(this)}
-                onMouseOut={this.mouseOut.bind(this)} onClick={this.clickEvent.bind(this)}>
+            <div
+                className="usa-da-treemap-cell"
+                style={style}
+                onMouseOver={this.mouseOver.bind(this)}
+                onFocus={this.mouseOver.bind(this)}
+                onMouseOut={this.mouseOut.bind(this)}
+                onBlur={this.mouseOut.bind(this)}
+                onClick={this.clickEvent.bind(this)}>
                 <div className="treemap-rule">{this.props.title}</div>
             </div>
         );

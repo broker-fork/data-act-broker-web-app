@@ -1,14 +1,19 @@
 /**
  * SubmissionGuideContent.jsx
  * Created by Mike Bray 5/19/16
- **/
+ */
 
 import React, { PropTypes } from 'react';
-import Banner from '../SharedComponents/Banner.jsx';
+import Banner from '../SharedComponents/Banner';
 
 const propTypes = {
     saveSkipGuide: PropTypes.func,
     session: PropTypes.object
+};
+
+const defaultProps = {
+    saveSkipGuide: null,
+    session: null
 };
 
 export default class SubmissionGuideContent extends React.Component {
@@ -79,31 +84,47 @@ export default class SubmissionGuideContent extends React.Component {
                                         </p>
                                         <ul>
                                             <li>File A: Appropriation Account data.
-                                                <a href={aws + "appropValid.csv"} target="_blank"
-                                                    rel="noopener noreferrer" data-reactid=".0.0.1.0.0.0.1.1.1.0">
+                                                <a
+                                                    href={aws + "appropValid.csv"}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    data-reactid=".0.0.1.0.0.0.1.1.1.0">
                                                     (Sample file)
                                                 </a>
                                             </li>
                                             <li>File B: Object Class and Program Activity.
-                                                <a href={aws + "programActivityValid.csv"} target="_blank"
-                                                    rel="noopener noreferrer" data-reactid=".0.0.1.0.0.0.1.2.1.0">
+                                                <a
+                                                    href={aws + "programActivityValid.csv"}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    data-reactid=".0.0.1.0.0.0.1.2.1.0">
                                                     (Sample file)
                                                 </a>
                                             </li>
                                             <li>File C: Award Financial data.
-                                                <a href={aws + "awardFinancialValid.csv"} target="_blank"
-                                                    rel="noopener noreferrer" data-reactid=".0.0.1.0.0.0.1.3.1.0">
+                                                <a
+                                                    href={aws + "awardFinancialValid.csv"}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    data-reactid=".0.0.1.0.0.0.1.3.1.0">
                                                     (Sample file)
                                                 </a>
                                             </li>
                                         </ul>
-                                        <p><strong>Files D1, D2, E, and F will be generated for you based on the
-                                        reporting period you provide.</strong></p>
+                                        <p>
+                                            <strong>
+                                                Files D1, D2, E, and F will be generated for you based on the
+                                                reporting period you provide.
+                                            </strong>
+                                        </p>
                                         <ul>
                                             <li>File D1: Award and Awardee Attributes (Procurement Award) data.</li>
                                             <li>File D2: Award and Awardee Attributes (Financial Assistance) data.
-                                                <a href={aws + "awardValid.csv"} target="_blank"
-                                                    rel="noopener noreferrer" data-reactid=".0.0.1.0.0.0.1.4.1.0">
+                                                <a
+                                                    href={aws + "awardValid.csv"}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    data-reactid=".0.0.1.0.0.0.1.4.1.0">
                                                     (Sample file)
                                                 </a>
                                             </li>
@@ -140,8 +161,10 @@ export default class SubmissionGuideContent extends React.Component {
                                     </div>
                                     <div className="col-md-11 usa-da-reg-wrapper mt-20">
                                         <h4>Review, Certify, and Publish</h4>
-                                        <p>Once your submission has successfully passed validation, this step allows you
-                                        to:</p>
+                                        <p>
+                                            Once your submission has successfully passed validation, this step allows
+                                            you to:
+                                        </p>
                                         <ul>
                                             <li>
                                                 Notify another user that the submission is ready for them to review,
@@ -159,14 +182,17 @@ export default class SubmissionGuideContent extends React.Component {
                                     <div className="row submitStep">
                                         <div className="col-xs-8 col-md-6 submission-guide-hide checkbox">
                                             <label>
-                                                <input type="checkbox" value="skipGuide"
+                                                <input
+                                                    type="checkbox"
+                                                    value="skipGuide"
                                                     onChange={this.toggleSkipGuide.bind(this)}
                                                     defaultChecked={this.props.session.skipGuide} />
                                                     Hide this page next time I submit files.
                                             </label>
                                         </div>
                                         <div className="col-xs-4 col-md-6">
-                                            <button type="button"
+                                            <button
+                                                type="button"
                                                 className="usa-da-button btn-primary btn-lg pull-right"
                                                 onClick={this.nextClicked.bind(this)}>
                                                 Next
@@ -184,3 +210,4 @@ export default class SubmissionGuideContent extends React.Component {
 }
 
 SubmissionGuideContent.propTypes = propTypes;
+SubmissionGuideContent.defaultProps = defaultProps;

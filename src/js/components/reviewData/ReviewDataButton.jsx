@@ -1,13 +1,18 @@
 /**
  * ReviewDataButton.jsx
  * Created by Mike Bray 4/5/16
- **/
+ */
 
 import React, { PropTypes } from 'react';
 
 const propTypes = {
     icon: PropTypes.element,
     label: PropTypes.string
+};
+
+const defaultProps = {
+    icon: null,
+    label: ''
 };
 
 export default class ReviewDataButton extends React.Component {
@@ -23,3 +28,4 @@ export default class ReviewDataButton extends React.Component {
 }
 
 ReviewDataButton.propTypes = propTypes;
+ReviewDataButton.defaultProps = defaultProps;

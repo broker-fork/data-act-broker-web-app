@@ -1,19 +1,24 @@
 /**
 * AddDataPageContainer.jsx
 * Created by Kevin Li
-**/
+*/
 
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as uploadActions from '../../redux/actions/uploadActions.js';
+import * as uploadActions from '../../redux/actions/uploadActions';
 
-import AddDataPage from '../../components/addData/AddDataPage.jsx';
+import AddDataPage from '../../components/addData/AddDataPage';
 
 const propTypes = {
     resetSubmission: PropTypes.func,
     setMeta: PropTypes.func
+};
+
+const defaultProps = {
+    resetSubmission: () => {},
+    setMeta: () => {}
 };
 
 class AddDataPageContainer extends React.Component {
@@ -29,6 +34,8 @@ class AddDataPageContainer extends React.Component {
 }
 
 AddDataPageContainer.propTypes = propTypes;
+AddDataPageContainer.defaultProps = defaultProps;
+
 
 export default connect(
     (state) => ({ submission: state.submission }),

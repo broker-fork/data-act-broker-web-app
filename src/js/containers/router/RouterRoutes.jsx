@@ -1,14 +1,14 @@
 import { hashHistory } from 'react-router';
-import LandingPage from '../../components/landing/LandingPage.jsx';
-import LoginPage from '../../components/login/LoginPage.jsx';
-import AuthPage from '../../components/login/AuthPage.jsx';
-import SubmissionGuideContainer from '../../containers/addData/SubmissionGuideContainer.jsx';
-import AddDataPageContainer from '../../containers/addData/AddDataPageContainer.jsx';
+import LandingPage from '../../components/landing/LandingPage';
+import LoginPage from '../../components/login/LoginPage';
+import AuthPage from '../../components/login/AuthPage';
+import SubmissionGuideContainer from '../../containers/addData/SubmissionGuideContainer';
+import AddDataPageContainer from '../../containers/addData/AddDataPageContainer';
 import UploadDetachedFilesPageContainer from
-    '../../containers/uploadDetachedFiles/UploadDetachedFilesPageContainer.jsx';
+    '../../containers/uploadDetachedFiles/UploadDetachedFilesPageContainer';
 import GenerateDetachedFilesPageContainer
-    from '../../containers/generateDetachedFiles/GenerateDetachedFilesPageContainer.jsx';
-import StoreSingleton from '../../redux/storeSingleton.js';
+    from '../../containers/generateDetachedFiles/GenerateDetachedFilesPageContainer';
+import StoreSingleton from '../../redux/storeSingleton';
 
 let instance = null;
 let store = new StoreSingleton().store;
@@ -46,14 +46,12 @@ const performAutoLogin = (location, replace) => {
             }
         }
     }
-    else {
-        if (session.login !== "loggedIn") {
-            if (path === "/login") {
-                pushMethod('/login');
-            }
-            else {
-                pushMethod('/login?redirect=' + path);
-            }
+    else if (session.login !== "loggedIn") {
+        if (path === "/login") {
+            pushMethod('/login');
+        }
+        else {
+            pushMethod('/login?redirect=' + path);
         }
     }
 };
@@ -153,7 +151,7 @@ const getRoutes = () => {
             onEnter: checkUserPermissions,
             getComponent(nextState, cb) {
                 require.ensure([], (require) => {
-                    cb(null, require('../../components/validateData/ValidateDataPage.jsx').default);
+                    cb(null, require('../../components/validateData/ValidateDataPage').default);
                 });
             },
             type: 'dabs'
@@ -163,7 +161,7 @@ const getRoutes = () => {
             onEnter: checkUserPermissions,
             getComponent(nextState, cb) {
                 require.ensure([], (require) => {
-                    cb(null, require('../../containers/submission/SubmissionContainer.jsx').default);
+                    cb(null, require('../../containers/submission/SubmissionContainer').default);
                 });
             },
             type: 'dabs'
@@ -173,7 +171,7 @@ const getRoutes = () => {
             onEnter: checkUserPermissions,
             getComponent(nextState, cb) {
                 require.ensure([], (require) => {
-                    cb(null, require('../../components/generateFiles/GenerateFilesPage.jsx').default);
+                    cb(null, require('../../components/generateFiles/GenerateFilesPage').default);
                 });
             },
             type: 'dabs'
@@ -183,7 +181,7 @@ const getRoutes = () => {
             onEnter: checkUserPermissions,
             getComponent(nextState, cb) {
                 require.ensure([], (require) => {
-                    cb(null, require('../../components/generateEF/GenerateEFPage.jsx').default);
+                    cb(null, require('../../components/generateEF/GenerateEFPage').default);
                 });
             },
             type: 'dabs'
@@ -193,7 +191,7 @@ const getRoutes = () => {
             onEnter: checkUserPermissions,
             getComponent(nextState, cb) {
                 require.ensure([], (require) => {
-                    cb(null, require('../../components/crossFile/CrossFilePage.jsx').default);
+                    cb(null, require('../../components/crossFile/CrossFilePage').default);
                 });
             },
             type: 'dabs'
@@ -203,7 +201,7 @@ const getRoutes = () => {
             onEnter: checkUserPermissions,
             getComponent(nextState, cb) {
                 require.ensure([], (require) => {
-                    cb(null, require('../../containers/review/ReviewDataContainer.jsx').default);
+                    cb(null, require('../../containers/review/ReviewDataContainer').default);
                 });
             },
             type: 'dabs'
@@ -213,7 +211,7 @@ const getRoutes = () => {
             onEnter: checkUserPermissions,
             getComponent(nextState, cb) {
                 require.ensure([], (require) => {
-                    cb(null, require('../../containers/history/HistoryContainer.jsx').default);
+                    cb(null, require('../../containers/history/HistoryContainer').default);
                 });
             },
             type: 'dabs'
@@ -285,7 +283,7 @@ const getRoutes = () => {
             onEnter: checkUserPermissions,
             getComponent(nextState, cb) {
                 require.ensure([], (require) => {
-                    cb(null, require('../../components/error/ErrorPage.jsx').default);
+                    cb(null, require('../../components/error/ErrorPage').default);
                 });
             },
             type: 'home'
@@ -305,7 +303,7 @@ function routeConstructor(routeInfo, onEnterIndex, type) {
             onEnter: routeInfo.onEnter[onEnterIndex],
             getComponent(nextState, cb) {
                 require.ensure([], (require) => {
-                    cb(null, require('../../components/landing/LandingPage.jsx').default);
+                    cb(null, require('../../components/landing/LandingPage').default);
                 });
             },
             type
@@ -317,7 +315,7 @@ function routeConstructor(routeInfo, onEnterIndex, type) {
             onEnter: routeInfo.onEnter[onEnterIndex],
             getComponent(nextState, cb) {
                 require.ensure([], (require) => {
-                    cb(null, require('../../components/dashboard/DashboardPage.jsx').default);
+                    cb(null, require('../../components/dashboard/DashboardPage').default);
                 });
             },
             type
@@ -329,12 +327,13 @@ function routeConstructor(routeInfo, onEnterIndex, type) {
             onEnter: routeInfo.onEnter[onEnterIndex],
             getComponent(nextState, cb) {
                 require.ensure([], (require) => {
-                    cb(null, require('../help/HelpContainer.jsx').default);
+                    cb(null, require('../help/HelpContainer').default);
                 });
             },
             type
         };
     }
+    return null;
 }
 
 // defining the routes outside of the component because React Router cannot handle state/prop changes that Redux causes

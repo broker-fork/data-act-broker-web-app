@@ -1,10 +1,10 @@
 /**
   * GenerateEFItem.jsx
   * Created by Kevin Li 8/24/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
-import * as Icons from '../../SharedComponents/icons/Icons.jsx';
+import * as Icons from '../../SharedComponents/icons/Icons';
 
 const propTypes = {
     description: PropTypes.string,
@@ -14,11 +14,13 @@ const propTypes = {
 };
 
 const defaultProps = {
-    comingSoon: false
+    comingSoon: false,
+    type: '',
+    title: '',
+    description: ''
 };
 
 export default class GenerateEFItem extends React.Component {
-
     clickedDownload(e) {
         e.preventDefault();
         const download = window.open(this.props[this.props.type.toLowerCase()].url, '_target');
@@ -83,7 +85,8 @@ export default class GenerateEFItem extends React.Component {
                                     <span /><span /><span /><span /><span />
                                 </div>
                             </div>
-                            <button className={"usa-da-button btn-primary btn-full" + hideDownload}
+                            <button
+                                className={"usa-da-button btn-primary btn-full" + hideDownload}
                                 onClick={this.clickedDownload.bind(this)}>
                                 Download
                             </button>

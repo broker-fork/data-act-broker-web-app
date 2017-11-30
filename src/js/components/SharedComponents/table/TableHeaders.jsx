@@ -5,19 +5,24 @@
 
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
-import TableSorter from './TableSorter.jsx';
+import TableSorter from './TableSorter';
 
 const propTypes = {
     onSort: PropTypes.func,
     currentSort: PropTypes.object,
-    data: PropTypes.array.isRequired,
+    data: PropTypes.array,
     headerClasses: PropTypes.array,
     unsortable: PropTypes.array,
     sortable: PropTypes.bool
 };
 
 const defaultProps = {
-    headerClasses: []
+    onSort: () => {},
+    currentSort: {},
+    data: [],
+    headerClasses: [],
+    unsortable: [],
+    sortable: true
 };
 
 export default class TableHeaders extends React.Component {
@@ -40,12 +45,13 @@ export default class TableHeaders extends React.Component {
                 sorters = <TableSorter onSort={this.props.onSort} col={i} active={activeSort} />;
             }
 
-            tableHeaders.push(<th key={i} className={this.props.headerClasses[i]}>
-                <div className={className} >
-                    {this.props.data[i]}
-                </div>
-                {sorters}
-            </th>);
+            tableHeaders.push(
+                <th key={i} className={this.props.headerClasses[i]}>
+                    <div className={className} >
+                        {this.props.data[i]}
+                    </div>
+                    {sorters}
+                </th>);
         }
 
         return (

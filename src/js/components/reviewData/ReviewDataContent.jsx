@@ -1,24 +1,30 @@
 /**
  * ReviewDataContent.jsx
  * Created by Mike Bray 3/28/16
- **/
+ */
 
 import React, { PropTypes } from 'react';
-import ReviewDataContentRow from './ReviewDataContentRow.jsx';
-import ReviewDataButton from './ReviewDataButton.jsx';
-import ReviewDataNotifyModal from './ReviewDataNotifyModal.jsx';
-import ReviewDataCertifyModal from './CertificationModal/ReviewDataCertifyModal.jsx';
-import RevalidateDataModal from './CertificationModal/RevalidateDataModal.jsx';
-import ReviewDataNarrative from './ReviewDataNarrative.jsx';
 import moment from 'moment';
-
-import * as Icons from '../SharedComponents/icons/Icons.jsx';
+import ReviewDataContentRow from './ReviewDataContentRow';
+import ReviewDataButton from './ReviewDataButton';
+import ReviewDataNotifyModal from './ReviewDataNotifyModal';
+import ReviewDataCertifyModal from './CertificationModal/ReviewDataCertifyModal';
+import RevalidateDataModal from './CertificationModal/RevalidateDataModal';
+import ReviewDataNarrative from './ReviewDataNarrative';
+import * as Icons from '../SharedComponents/icons/Icons';
 
 const propTypes = {
     data: PropTypes.object,
     params: PropTypes.object,
     session: PropTypes.object,
     submissionID: PropTypes.string
+};
+
+const defaultProps = {
+    data: null,
+    params: null,
+    session: null,
+    submissionID: ''
 };
 
 export default class ReviewDataContent extends React.Component {
@@ -107,7 +113,7 @@ export default class ReviewDataContent extends React.Component {
         const cents = currencyString.split(".")[1];
         let dollars = currencyString.split(".")[0];
         // start at the end and every 3 numbers add a comma to the string
-        for (let i = dollars.length - 3; i > 0; i = i - 3) {
+        for (let i = dollars.length - 3; i > 0; i -= 3) {
             dollars = dollars.slice(0, i) + "," + dollars.slice(i);
         }
         let formattedCurrencyString = "$" + dollars + "." + cents;
@@ -169,12 +175,6 @@ export default class ReviewDataContent extends React.Component {
             buttons.push(<ReviewDataButton key={i} icon={buttonContent[i][0]} label={buttonContent[i][1]} />);
         }
 
-        let fileSize = 0;
-
-        for (let k = 0; k < this.props.data.jobs.length; k++) {
-            fileSize += this.props.data.jobs[k].file_size;
-        }
-
         const reportLabels = ['Agency Name:', 'Report Start Date:', 'Report End Date:',
             'Award Obligations Incurred (file C):', 'Total Financial Assistance Obligations:',
             'Total Procurement Obligations:'];
@@ -207,10 +207,12 @@ export default class ReviewDataContent extends React.Component {
         else if (!this.props.data.quarterly_submission) {
             certifyButtonText = "Monthly submissions cannot be certified";
             notifyButtonText = "Notify Another User that the Submission is Ready";
-            monthlySubmissionError = (<div className="alert alert-danger text-center monthly-submission-error"
-                role="alert">
-                Monthly submissions cannot be certified
-            </div>);
+            monthlySubmissionError = (
+                <div
+                    className="alert alert-danger text-center monthly-submission-error"
+                    role="alert">
+                    Monthly submissions cannot be certified
+                </div>);
         }
         else if (blockedWindow) {
             certifyButtonText = "You cannot certify until " +
@@ -226,8 +228,10 @@ export default class ReviewDataContent extends React.Component {
             <div className="container">
                 <div className="row center-block mt-60">
                     <div className="col-md-12 text-center">
-                        <h5 data-testid="review-header">Congratulations your data has been successfully validated!
-                        Now, what would you like to do with it?</h5>
+                        <h5 data-testid="review-header">
+                            Congratulations your data has been successfully validated!
+                            Now, what would you like to do with it?
+                        </h5>
                     </div>
                 </div>
                 <div className="center-block usa-da-review-data-content-holder">
@@ -252,14 +256,16 @@ export default class ReviewDataContent extends React.Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-4"></div>
-                        <ReviewDataNarrative narrative={this.props.data.file_narrative}
+                        <div className="col-md-4" />
+                        <ReviewDataNarrative
+                            narrative={this.props.data.file_narrative}
                             submissionID={this.props.params.submissionID} />
                     </div>
                     <div className="mt-20">
                         <div className="submission-wrapper">
                             <div className="left-link">
-                                <button onClick={buttonAction}
+                                <button
+                                    onClick={buttonAction}
                                     className={"usa-da-button btn-primary btn-lg btn-full " + buttonClass}>
                                     <div className="button-wrapper">
                                         <div className="button-icon">
@@ -272,7 +278,8 @@ export default class ReviewDataContent extends React.Component {
                                 </button>
                             </div>
                             <div className="right-link">
-                                <button onClick={this.openModal.bind(this, 'Notify')}
+                                <button
+                                    onClick={this.openModal.bind(this, 'Notify')}
                                     className="usa-da-button btn-primary btn-lg btn-full last">
                                     <div className="button-wrapper">
                                         <div className="button-icon">
@@ -289,15 +296,22 @@ export default class ReviewDataContent extends React.Component {
                     </div>
 
                     <div id="reviewDataNotifyModalHolder">
-                        <ReviewDataNotifyModal {...this.props} closeModal={this.closeModal.bind(this, 'Notify')}
+                        <ReviewDataNotifyModal
+                            {...this.props}
+                            closeModal={this.closeModal.bind(this, 'Notify')}
                             isOpen={this.state.openNotify} />
                     </div>
                     <div id="reviewDataCertifyModalHolder">
-                        <ReviewDataCertifyModal {...this.props} closeModal={this.closeModal.bind(this, 'Certify')}
-                            isOpen={this.state.openCertify} warnings={this.state.totalWarnings} />
+                        <ReviewDataCertifyModal
+                            {...this.props}
+                            closeModal={this.closeModal.bind(this, 'Certify')}
+                            isOpen={this.state.openCertify}
+                            warnings={this.state.totalWarnings} />
                     </div>
                     <div id="revalidateDataModalHolder">
-                        <RevalidateDataModal {...this.props} closeModal={this.closeModal.bind(this, 'Revalidate')}
+                        <RevalidateDataModal
+                            {...this.props}
+                            closeModal={this.closeModal.bind(this, 'Revalidate')}
                             isOpen={this.state.openRevalidate} />
                     </div>
                 </div>
@@ -307,3 +321,4 @@ export default class ReviewDataContent extends React.Component {
 }
 
 ReviewDataContent.propTypes = propTypes;
+ReviewDataContent.defaultProps = defaultProps;

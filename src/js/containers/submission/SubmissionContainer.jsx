@@ -1,17 +1,21 @@
 /**
  * SubmissionContainer.jsx
  * Created by Minahm Kim 6/29/17
- **/
+ */
 
 import React, { PropTypes } from 'react';
 import { hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 
-import * as SubmissionGuideHelper from '../../helpers/submissionGuideHelper.js';
-import LoadingPage from '../../components/submission/SubmissionPage.jsx';
+import * as SubmissionGuideHelper from '../../helpers/submissionGuideHelper';
+import LoadingPage from '../../components/submission/SubmissionPage';
 
 const propTypes = {
     params: PropTypes.object
+};
+
+const defaultProps = {
+    params: {}
 };
 
 class SubmissionContainer extends React.Component {
@@ -32,12 +36,13 @@ class SubmissionContainer extends React.Component {
 
     render() {
         return (
-            <LoadingPage {...this.props} submissionID={this.props.params.submissionID}/>
+            <LoadingPage {...this.props} submissionID={this.props.params.submissionID} />
         );
     }
 }
 
 SubmissionContainer.propTypes = propTypes;
+SubmissionContainer.defaultProps = defaultProps;
 
 export default connect(
     (state) => ({ session: state.session })

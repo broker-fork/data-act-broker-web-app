@@ -1,12 +1,16 @@
 /**
  * ReviewDataNarrativeDropdown.jsx
  * Created by Alisa Burdeyny 11/21/16
- **/
+ */
 
 import React, { PropTypes } from 'react';
 
 const propTypes = {
     changeFile: PropTypes.func
+};
+
+const defaultProps = {
+    changeFile: null
 };
 
 export default class ReviewDataNarrativeDropdown extends React.Component {
@@ -32,3 +36,4 @@ export default class ReviewDataNarrativeDropdown extends React.Component {
 }
 
 ReviewDataNarrativeDropdown.propTypes = propTypes;
+ReviewDataNarrativeDropdown.defaultProps = defaultProps;

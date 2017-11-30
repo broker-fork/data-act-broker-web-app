@@ -1,18 +1,24 @@
 /**
  * ValidateDataErrorReport.jsx
  * Created by Mike Bray 3/28/16
- **/
+ */
 
 import React, { PropTypes } from 'react';
-import ScrollableTable from '../SharedComponents/table/ScrollableTable.jsx';
-import * as Icons from '../SharedComponents/icons/Icons.jsx';
-import * as ReviewHelper from '../../helpers/reviewHelper.js';
 import _ from 'lodash';
+import ScrollableTable from '../SharedComponents/table/ScrollableTable';
+import * as Icons from '../SharedComponents/icons/Icons';
+import * as ReviewHelper from '../../helpers/reviewHelper';
 
 const propTypes = {
     data: PropTypes.object,
     submission: PropTypes.string,
     type: PropTypes.string
+};
+
+const defaultProps = {
+    data: {},
+    submission: '',
+    type: ''
 };
 
 export default class ValidateDataErrorReport extends React.Component {
@@ -52,7 +58,7 @@ export default class ValidateDataErrorReport extends React.Component {
                 this.setState({
                     signInProgress: false
                 });
-                console.log(err);
+                console.error(err);
             });
     }
 
@@ -91,7 +97,10 @@ export default class ValidateDataErrorReport extends React.Component {
                 rowData.forEach((row) => {
                     rows.push([row]);
                 });
-                return (<ScrollableTable headers={[errorData.header]} data={rows} key={index}
+                return (<ScrollableTable
+                    headers={[errorData.header]}
+                    data={rows}
+                    key={index}
                     onSort={this.sortTable.bind(this)} />);
             });
         }
@@ -109,7 +118,8 @@ export default class ValidateDataErrorReport extends React.Component {
                             <h6>Header Error Report</h6>
                         </div>
                         <div className="col-md-3 mr-0">
-                            <div className="usa-da-download pull-right"
+                            <div
+                                className="usa-da-download pull-right"
                                 onClick={this.clickedReport.bind(this)}>
                                 <span className="usa-da-icon usa-da-download-report">
                                     <Icons.CloudDownload />
@@ -127,3 +137,4 @@ export default class ValidateDataErrorReport extends React.Component {
 }
 
 ValidateDataErrorReport.propTypes = propTypes;
+ValidateDataErrorReport.defaultProps = defaultProps;

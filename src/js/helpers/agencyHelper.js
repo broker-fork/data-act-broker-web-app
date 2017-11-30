@@ -1,7 +1,7 @@
-import Request from './sessionSuperagent.js';
 import Q from 'q';
+import Request from './sessionSuperagent';
 
-import { kGlobalConstants } from '../GlobalConstants.js';
+import { kGlobalConstants } from '../GlobalConstants';
 
 export const fetchAgencies = () => {
     const deferred = Q.defer();

@@ -1,19 +1,19 @@
 /**
   * ErrorBox.jsx
   * Created by Kevin Li 6/15/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
-import ComparisonTable from './ComparisonTable.jsx';
-import FileProgress from '../../SharedComponents/FileProgress.jsx';
-import UploadButtonContainer from '../../../containers/crossFile/CrossFileUploadButtonContainer.jsx';
-import GeneratedErrorButton from './GeneratedErrorButton.jsx';
-import FileWarning from './FileWarning.jsx';
-import ErrorTabs from './ErrorTabs.jsx';
+import ComparisonTable from './ComparisonTable';
+import FileProgress from '../../SharedComponents/FileProgress';
+import UploadButtonContainer from '../../../containers/crossFile/CrossFileUploadButtonContainer';
+import GeneratedErrorButton from './GeneratedErrorButton';
+import FileWarning from './FileWarning';
+import ErrorTabs from './ErrorTabs';
 
-import * as ReviewHelper from '../../../helpers/reviewHelper.js';
-import * as PermissionsHelper from '../../../helpers/permissionsHelper.js';
+import * as ReviewHelper from '../../../helpers/reviewHelper';
+import * as PermissionsHelper from '../../../helpers/permissionsHelper';
 
 const propTypes = {
     forceUpdate: PropTypes.func,
@@ -23,6 +23,16 @@ const propTypes = {
     agencyName: PropTypes.string,
     status: PropTypes.string,
     submissionID: PropTypes.string
+};
+
+const defaultProps = {
+    forceUpdate: null,
+    meta: null,
+    session: null,
+    submission: null,
+    agencyName: '',
+    status: '',
+    submissionID: ''
 };
 
 const dFiles = ['d1', 'd2'];
@@ -90,24 +100,38 @@ export default class ErrorBox extends React.Component {
     }
 
     uploadButtons() {
-        let firstUploadButton = (<UploadButtonContainer file={ReviewHelper.globalFileData[this.props.meta.firstKey]}
-            fileKey={this.props.meta.firstKey} pair={this.props.meta.key} type={this.state.firstType} />);
-        let secondUploadButton = (<UploadButtonContainer file={ReviewHelper.globalFileData[this.props.meta.secondKey]}
-            fileKey={this.props.meta.secondKey} pair={this.props.meta.key} type={this.state.secondType} />);
+        let firstUploadButton = (<UploadButtonContainer
+            file={ReviewHelper.globalFileData[this.props.meta.firstKey]}
+            fileKey={this.props.meta.firstKey}
+            pair={this.props.meta.key}
+            type={this.state.firstType} />);
+        let secondUploadButton = (<UploadButtonContainer
+            file={ReviewHelper.globalFileData[this.props.meta.secondKey]}
+            fileKey={this.props.meta.secondKey}
+            pair={this.props.meta.key}
+            type={this.state.secondType} />);
 
         const firstFile = ReviewHelper.globalFileData[this.props.meta.firstKey];
         const secondFile = ReviewHelper.globalFileData[this.props.meta.secondKey];
 
         if (_.indexOf(dFiles, firstFile.letter.toLowerCase()) > -1) {
             // first file is a D1/D2 file
-            firstUploadButton = (<GeneratedErrorButton file={firstFile} fileKey={this.props.meta.firstKey}
-                pair={this.props.meta.key} type={this.state.firstType} submissionID={this.props.submissionID}
+            firstUploadButton = (<GeneratedErrorButton
+                file={firstFile}
+                fileKey={this.props.meta.firstKey}
+                pair={this.props.meta.key}
+                type={this.state.firstType}
+                submissionID={this.props.submissionID}
                 forceUpdate={this.props.forceUpdate} />);
         }
         if (_.indexOf(dFiles, secondFile.letter.toLowerCase()) > -1) {
             // second file is a D1/D2 file
-            secondUploadButton = (<GeneratedErrorButton file={secondFile} fileKey={this.props.meta.secondKey}
-                pair={this.props.meta.key} type={this.state.secondType} submissionID={this.props.submissionID}
+            secondUploadButton = (<GeneratedErrorButton
+                file={secondFile}
+                fileKey={this.props.meta.secondKey}
+                pair={this.props.meta.key}
+                type={this.state.secondType}
+                submissionID={this.props.submissionID}
                 forceUpdate={this.props.forceUpdate} />);
         }
 
@@ -165,7 +189,7 @@ export default class ErrorBox extends React.Component {
                 this.setState({
                     signInProgress: false
                 });
-                console.log(err);
+                console.error(err);
             });
     }
 
@@ -224,19 +248,21 @@ export default class ErrorBox extends React.Component {
         let upload = null;
         if (PermissionsHelper.checkAgencyPermissions(this.props.session, this.props.agencyName)) {
             uploadHeader = 'Upload Corrected Files';
-            upload = (<div>
-                <div className="row mb-10">
-                    <div className="col-md-12">
-                        {this.state.firstButton}
+            upload = (
+                <div>
+                    <div className="row mb-10">
+                        <div className="col-md-12">
+                            {this.state.firstButton}
+                        </div>
                     </div>
-                </div>
 
-                <div className="row">
-                    <div className="col-md-12">
-                        {this.state.secondButton}
+                    <div className="row">
+                        <div className="col-md-12">
+                            {this.state.secondButton}
+                        </div>
                     </div>
                 </div>
-            </div>);
+            );
         }
 
         return (
@@ -254,7 +280,9 @@ export default class ErrorBox extends React.Component {
                                 <div className="button-list">
                                     <div className="row">
                                         <div className="col-md-12">
-                                            <a href="#" onClick={this.clickedReport.bind(this, reportWarning)}
+                                            <a
+                                                href="#"
+                                                onClick={this.clickedReport.bind(this, reportWarning)}
                                                 className="usa-da-button btn-full btn-primary">
                                                 {downloadLabel}
                                             </a>
@@ -289,3 +317,4 @@ export default class ErrorBox extends React.Component {
 }
 
 ErrorBox.propTypes = propTypes;
+ErrorBox.defaultProps = defaultProps;

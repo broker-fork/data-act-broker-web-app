@@ -4,16 +4,16 @@
   */
 
 import React, { PropTypes } from 'react';
-import TableRow from './TableRow.jsx';
-import TableHeaders from './TableHeaders.jsx';
+import TableRow from './TableRow';
+import TableHeaders from './TableHeaders';
 
 const propTypes = {
     onSort: PropTypes.func,
     cellClasses: PropTypes.array,
-    data: PropTypes.array.isRequired,
+    data: PropTypes.array,
     headerClasses: PropTypes.array,
-    headers: PropTypes.array.isRequired,
-    unsortable: PropTypes.array.isRequired,
+    headers: PropTypes.array,
+    unsortable: PropTypes.array,
     sortable: PropTypes.bool
 };
 
@@ -23,7 +23,8 @@ const defaultProps = {
     sortable: true,
     cellClasses: [],
     headerClasses: [],
-    unsortable: []
+    unsortable: [],
+    onSort: () => {}
 };
 
 export default class FormattedTable extends React.Component {
@@ -58,9 +59,13 @@ export default class FormattedTable extends React.Component {
                 <div className="usa-da-table-header">
                     <table className="usa-da-table table-bordered">
                         <thead>
-                            <TableHeaders data={this.props.headers} sortable={this.props.sortable}
-                                unsortable={this.props.unsortable} onSort={this.sortTable.bind(this)}
-                                currentSort={this.state.sort} headerClasses={this.props.headerClasses} />
+                            <TableHeaders
+                                data={this.props.headers}
+                                sortable={this.props.sortable}
+                                unsortable={this.props.unsortable}
+                                onSort={this.sortTable.bind(this)}
+                                currentSort={this.state.sort}
+                                headerClasses={this.props.headerClasses} />
                         </thead>
                     </table>
                 </div>

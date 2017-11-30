@@ -1,24 +1,23 @@
 /**
   * CrossFileItem.jsx
   * Created by Kevin Li 6/14/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
-import FileComponent from './components/FileComponent.jsx';
-import ComparisonComponent from './components/ComparisonComponent.jsx';
-import LoadingComponent from './components/LoadingComponent.jsx';
-import ErrorBox from './components/ErrorBox.jsx';
-import ReplacementBox from './components/ReplacementBox.jsx';
+import FileComponent from './components/FileComponent';
+import ComparisonComponent from './components/ComparisonComponent';
+import LoadingComponent from './components/LoadingComponent';
+import ErrorBox from './components/ErrorBox';
+import ReplacementBox from './components/ReplacementBox';
 
 const propTypes = {
     meta: PropTypes.object,
-    status: PropTypes.string
+    status: PropTypes.string,
+    type: PropTypes.string
 };
 
 const defaultProps = {
     type: 'loading',
-    firstFile: null,
-    secondFile: null,
     meta: {
         firstKey: '',
         firstName: '',
@@ -26,7 +25,8 @@ const defaultProps = {
         secondKey: '',
         secondName: '',
         secondType: ''
-    }
+    },
+    status: null
 };
 
 export default class CrossFileItem extends React.Component {
@@ -79,19 +79,25 @@ export default class CrossFileItem extends React.Component {
                             <div className="col-md-12">
                                 <div className="usa-da-cross-file-item">
                                     <div className="file-left">
-                                        <FileComponent fileType={this.props.meta.firstType}
-                                            name={this.props.meta.firstName} fileKey={this.props.meta.firstKey}
+                                        <FileComponent
+                                            fileType={this.props.meta.firstType}
+                                            name={this.props.meta.firstName}
+                                            fileKey={this.props.meta.firstKey}
                                             toggleUploadBox={this.toggleUploadBox.bind(this)}
-                                            expanded={this.state.uploadBox} {...this.props} />
+                                            expanded={this.state.uploadBox}
+                                            {...this.props} />
                                     </div>
                                     <div className="file-compare">
                                         {middle}
                                     </div>
                                     <div className="file-right">
-                                        <FileComponent fileType={this.props.meta.secondType}
-                                            name={this.props.meta.secondName} fileKey={this.props.meta.secondKey}
+                                        <FileComponent
+                                            fileType={this.props.meta.secondType}
+                                            name={this.props.meta.secondName}
+                                            fileKey={this.props.meta.secondKey}
                                             toggleUploadBox={this.toggleUploadBox.bind(this)}
-                                            expanded={this.state.uploadBox} {...this.props} />
+                                            expanded={this.state.uploadBox}
+                                            {...this.props} />
                                     </div>
                                 </div>
                             </div>

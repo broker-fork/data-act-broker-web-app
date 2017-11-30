@@ -1,15 +1,15 @@
 /**
   * CrossFileOverlay.jsx
   * Created by Kevin Li 6/16/16
-  **/
+  */
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import { hashHistory } from 'react-router';
-import * as Icons from '../SharedComponents/icons/Icons.jsx';
-import CommonOverlay from '../SharedComponents/overlays/CommonOverlay.jsx';
-import LoadingBauble from '../SharedComponents/overlays/LoadingBauble.jsx';
+import * as Icons from '../SharedComponents/icons/Icons';
+import CommonOverlay from '../SharedComponents/overlays/CommonOverlay';
+import LoadingBauble from '../SharedComponents/overlays/LoadingBauble';
 
-import * as PermissionsHelper from '../../helpers/permissionsHelper.js';
+import * as PermissionsHelper from '../../helpers/permissionsHelper';
 
 const propTypes = {
     uploadFiles: PropTypes.func,
@@ -17,16 +17,21 @@ const propTypes = {
     submission: PropTypes.object,
     agencyName: PropTypes.string,
     mode: PropTypes.string,
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
+    errors: PropTypes.array
 };
 
 const defaultProps = {
     errors: ['error'],
-    loading: true
+    loading: true,
+    uploadFiles: null,
+    session: null,
+    submission: null,
+    agencyName: '',
+    mode: ''
 };
 
 export default class CrossFileOverlay extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -131,11 +136,13 @@ export default class CrossFileOverlay extends React.Component {
             overlay.iconClass = 'overlay-animation';
             overlay.message = 'Your files are being validated.';
             overlay.hideButtons = true;
-            overlay.detail = (<div>
-                You can return to this page at any time to check the validation status by using this link:
-                <br />
-                <a href={window.location.href}>{window.location.href}</a>
-            </div>);
+            overlay.detail = (
+                <div>
+                    You can return to this page at any time to check the validation status by using this link:
+                    <br />
+                    <a href={window.location.href}>{window.location.href}</a>
+                </div>
+            );
         }
         else if (this.props.mode === 'success') {
             // loading finished, show success (default state is to show errors)
@@ -202,12 +209,19 @@ export default class CrossFileOverlay extends React.Component {
                 iconClass={this.state.overlay.iconClass}
                 showButtons={!this.state.overlay.hideButtons}>
                 <div className="usa-da-btn-bg">
-                    <button className={"usa-da-button" + this.state.overlay.uploadButtonClass}
-                        disabled={this.state.overlay.uploadButtonDisabled} onClick={this.props.uploadFiles}>
-                        {this.state.overlay.buttonText}</button>
-                    <button className={"usa-da-validation-overlay-review usa-da-button" +
-                        this.state.overlay.nextButtonClass} disabled={this.state.overlay.nextButtonDisabled}
-                        onClick={this.pressedNext.bind(this)}>Next</button>
+                    <button
+                        className={"usa-da-button" + this.state.overlay.uploadButtonClass}
+                        disabled={this.state.overlay.uploadButtonDisabled}
+                        onClick={this.props.uploadFiles}>
+                        {this.state.overlay.buttonText}
+                    </button>
+                    <button
+                        className={"usa-da-validation-overlay-review usa-da-button" +
+                        this.state.overlay.nextButtonClass}
+                        disabled={this.state.overlay.nextButtonDisabled}
+                        onClick={this.pressedNext.bind(this)}>
+                        Next
+                    </button>
                 </div>
             </CommonOverlay>
         );

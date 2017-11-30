@@ -1,23 +1,27 @@
 /**
   * GenerateEFPage.jsx
   * Created by Kevin Li 8/23/16
-  **/
+  */
 
 import React, { PropTypes } from 'react';
-import Navbar from '../SharedComponents/navigation/NavigationComponent.jsx';
-import AddDataHeader from './../addData/AddDataHeader.jsx';
-import Progress from '../SharedComponents/ProgressComponent.jsx';
+import Navbar from '../SharedComponents/navigation/NavigationComponent';
+import AddDataHeader from './../addData/AddDataHeader';
+import Progress from '../SharedComponents/ProgressComponent';
 
-import GenerateEFContainer from '../../containers/generateEF/GenerateEFContainer.jsx';
-import GenerateEFError from './GenerateEFError.jsx';
+import GenerateEFContainer from '../../containers/generateEF/GenerateEFContainer';
+import GenerateEFError from './GenerateEFError';
 
 const propTypes = {
     params: PropTypes.object,
     route: PropTypes.object
 };
 
-export default class GenerateEFPage extends React.Component {
+const defaultProps = {
+    params: null,
+    route: null
+};
 
+export default class GenerateEFPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -35,7 +39,8 @@ export default class GenerateEFPage extends React.Component {
     }
 
     render() {
-        let pageContent = (<GenerateEFContainer submissionID={this.props.params.submissionID}
+        let pageContent = (<GenerateEFContainer
+            submissionID={this.props.params.submissionID}
             showError={this.showError.bind(this)} />);
 
         if (this.state.showError) {
@@ -60,3 +65,4 @@ export default class GenerateEFPage extends React.Component {
 }
 
 GenerateEFPage.propTypes = propTypes;
+GenerateEFPage.defaultProps = defaultProps;
