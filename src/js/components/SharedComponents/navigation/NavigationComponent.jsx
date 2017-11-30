@@ -13,6 +13,7 @@ import SkipNavigationLink from './SkipNavigationLink';
 import TestEnvironmentBanner from '../banners/TestEnvironmentBanner';
 import * as sessionActions from '../../../redux/actions/sessionActions';
 import * as PermissionHelper from '../../../helpers/permissionsHelper';
+import * as Icons from '../icons/Icons';
 
 const propTypes = {
     setSession: PropTypes.func,
@@ -31,6 +32,10 @@ const defaultProps = {
 export class Navbar extends React.Component {
     constructor(props) {
         super(props);
+        
+        this.state = {
+            type: this.props.type
+        }
     }
 
     getTabs() {
@@ -76,7 +81,7 @@ export class Navbar extends React.Component {
     }
 
     handleChange(e) {
-        console.log(e.target.value)
+        this.setState({type: e.target.value})
     }
 
     render() {
@@ -104,6 +109,13 @@ export class Navbar extends React.Component {
         if (!kGlobalConstants.PROD) {
             navClass = " tall";
             testBanner = <TestEnvironmentBanner />;
+        }
+
+        let fabs_selection = null;
+        let dabs_selection = 'selected';
+        if(this.state.type === 'fabs') {
+            fabs_selection = 'selected';
+            dabs_selection = null;
         }
 
         return (
@@ -136,13 +148,20 @@ export class Navbar extends React.Component {
                                 <span className="icon-bar" />
                                 <span className="icon-bar" />
                             </button>
-                            <a className="navbar-brand usa-da-header-brand" href="#/">
-                                DATA Act Broker
+                            <span className="navbar-brand usa-da-header-brand">
+                                <span className='brand'><a href="#/">DATA Act Broker</a></span>
                                 <select className='navbar-selector' onChange={this.handleChange}>
-                                    <option value="fabs">FABS</option>
-                                    <option value="dabs">DABS</option>
+                                    <option value="fabs" selected={fabs_selection}>
+                                        Financial Assistance Broker Submission (FABS)
+                                    </option>
+                                    <option value="dabs" selected={dabs_selection}>
+                                        Data Act Broker Submission (DABS)
+                                    </option>
                                 </select>
-                            </a>
+                                <div className="usa-da-icon usa-da-form-icon">
+                                    <Icons.AngleDown/>
+                                </div>
+                            </span>
                         </div>
 
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

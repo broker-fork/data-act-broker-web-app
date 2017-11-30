@@ -4,9 +4,15 @@
 	.usa-da-header-navbar {
         display: table;
     }
+    .brand {
+        width: 38%;
+        display: inline-block;
+    }
     .usa-da-header-brand,
     .usa-da-header-brand:hover,
     .usa-da-header-brand:visited {
+        width:105%;
+        position: relative;
         font-size: 2.5rem;
         line-height: ($header-height - $top-header-height);
         font-weight: $font-light;
@@ -18,6 +24,42 @@
         .navbar-selector {
             background-color: rgba(0,0,0,0);
             border-color: rgba(0,0,0,0);
+        }
+
+        a {
+            color: $color-white;
+        }
+
+        .navbar-selector {
+            width: 62%;
+            font-size: 1.5rem;
+            color: #9DDAF0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -o-appearance: none;
+            appearance: none; 
+        }
+
+        .usa-da-form-icon {
+            @import "../../../components/inputs/_fieldIcon";
+            @include fieldIcon;
+            svg {
+                top: 32px;
+                right: -20px;
+            }
+        }
+
+        .navbar-selector + i.fa {
+            float: right;
+            margin-top: -26px;
+            margin-right: 10px;
+            /* this is so when you click on the chevron, your click actually goes on the dropdown menu */
+            pointer-events: none;
+            /* everything after this is just to cover up the original arrow */
+            /* (for browsers that don't support the syntax used above) */
+            background-color: transparent;
+            color:black!important;
+            padding-right: 5px;
         }
     }
     #usa-da-header-link-holder {
