@@ -21,10 +21,6 @@
         display: table-cell;
         vertical-align: middle;
         padding: 0;
-        .navbar-selector {
-            background-color: rgba(0,0,0,0);
-            border-color: rgba(0,0,0,0);
-        }
 
         a {
             color: $color-white;
@@ -36,14 +32,23 @@
             height: 4rem;
             margin-top: 1rem;
             position: absolute;
-            width: 10px;
+            width: 7px;
             top: 1rem;
         }
 
         .navbar-selector {
-            width: 65%;
             font-size: 1.5rem;
             color: #9DDAF0;
+            background-color: rgba(0,0,0,0);
+            border-color: rgba(0,0,0,0);
+        }
+
+        .navbar-selector.fabs {
+            width: 65%;
+        }
+
+        .navbar-selector.dabs {
+            width: 51%;
         }
 
         .usa-da-form-icon {

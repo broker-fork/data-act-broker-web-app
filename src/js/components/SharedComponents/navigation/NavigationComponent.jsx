@@ -149,7 +149,7 @@ export class Navbar extends React.Component {
                                     <div className="vert-bar" />
                                 </span>
                                 <select
-                                    className="navbar-selector"
+                                    className={"navbar-selector " + this.state.type}
                                     onChange={this.handleChange.bind(this)}
                                     value={this.state.type}>
                                     <option value="fabs">
