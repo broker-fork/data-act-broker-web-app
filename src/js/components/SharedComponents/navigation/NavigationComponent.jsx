@@ -44,10 +44,12 @@ export class Navbar extends React.Component {
             Help: 'help'
         };
 
+        console.log(this.state.type)
+
         if (this.props.logoOnly) {
             tabNames = {};
         }
-        else if (this.props.type === 'fabs') {
+        else if (this.state.type === 'fabs') {
             // user has FABS permissions
             const fabsWrite = this.props.session.admin || PermissionHelper.checkFabsPermissions(this.props.session);
             tabNames = {
@@ -57,7 +59,7 @@ export class Navbar extends React.Component {
                 Help: 'FABShelp'
             };
         }
-        else if (this.props.type === 'dabs') {
+        else if (this.state.type === 'dabs') {
             // user has DABS permissions
             const dabsWrite = this.props.session.admin || PermissionHelper.checkPermissions(this.props.session);
             tabNames = {
@@ -111,13 +113,6 @@ export class Navbar extends React.Component {
             testBanner = <TestEnvironmentBanner />;
         }
 
-        let fabs_selection = null;
-        let dabs_selection = 'selected';
-        if(this.state.type === 'fabs') {
-            fabs_selection = 'selected';
-            dabs_selection = null;
-        }
-
         return (
             <nav className={"navbar navbar-default usa-da-header" + navClass}>
                 <SkipNavigationLink />
@@ -149,18 +144,21 @@ export class Navbar extends React.Component {
                                 <span className="icon-bar" />
                             </button>
                             <span className="navbar-brand usa-da-header-brand">
-                                <span className='brand'><a href="#/">DATA Act Broker</a></span>
-                                <select className='navbar-selector' onChange={this.handleChange}>
-                                    <option value="fabs" selected={fabs_selection}>
+                                <span className="brand">
+                                    <a href="#/">DATA Act Broker</a>
+                                    <div className="vert-bar" />
+                                </span>
+                                <select
+                                    className="navbar-selector"
+                                    onChange={this.handleChange.bind(this)}
+                                    value={this.state.type}>
+                                    <option value="fabs">
                                         Financial Assistance Broker Submission (FABS)
                                     </option>
-                                    <option value="dabs" selected={dabs_selection}>
+                                    <option value="dabs">
                                         Data Act Broker Submission (DABS)
                                     </option>
                                 </select>
-                                <div className="usa-da-icon usa-da-form-icon">
-                                    <Icons.AngleDown/>
-                                </div>
                             </span>
                         </div>
 

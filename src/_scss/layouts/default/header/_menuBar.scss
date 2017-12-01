@@ -5,7 +5,7 @@
         display: table;
     }
     .brand {
-        width: 38%;
+        width: 35%;
         display: inline-block;
     }
     .usa-da-header-brand,
@@ -30,14 +30,20 @@
             color: $color-white;
         }
 
+        .vert-bar {
+            border-right: .5px solid #797979;
+            display: inline-block;
+            height: 4rem;
+            margin-top: 1rem;
+            position: absolute;
+            width: 10px;
+            top: 1rem;
+        }
+
         .navbar-selector {
-            width: 62%;
+            width: 65%;
             font-size: 1.5rem;
             color: #9DDAF0;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            -o-appearance: none;
-            appearance: none; 
         }
 
         .usa-da-form-icon {
