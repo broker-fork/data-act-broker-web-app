@@ -4,14 +4,9 @@
 	.usa-da-header-navbar {
         display: table;
     }
-    .brand {
-        width: 35%;
-        display: inline-block;
-    }
     .usa-da-header-brand,
     .usa-da-header-brand:hover,
     .usa-da-header-brand:visited {
-        width:105%;
         position: relative;
         font-size: 2.5rem;
         line-height: ($header-height - $top-header-height);
@@ -21,6 +16,14 @@
         display: table-cell;
         vertical-align: middle;
         padding: 0;
+
+        .navbar-drop {
+            width: 105%;
+            .brand {
+                width: 35%;
+                display: inline-block;
+            }
+        }
 
         a {
             color: $color-white;

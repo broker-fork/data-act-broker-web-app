@@ -38,13 +38,21 @@ export class Navbar extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.updateType(nextProps.type);
+    }
+
+    updateType(newType) {
+        if(this.state.type !== newType) {
+            this.setState({ type: newType })
+        }
+    }
+
     getTabs() {
         // default access: only Help page
         let tabNames = {
             Help: 'help'
         };
-
-        console.log(this.state.type)
 
         if (this.props.logoOnly) {
             tabNames = {};
@@ -113,6 +121,34 @@ export class Navbar extends React.Component {
             testBanner = <TestEnvironmentBanner />;
         }
 
+        let dropDown = (<span className="brand">
+                <a href="#/">DATA Act Broker</a>
+            </span>);
+        if (this.state.type === 'dabs' || this.state.type === 'fabs') {
+            dropDown = (
+                <div className='navbar-drop'>
+                    <span className="brand">
+                        <a href="#/">DATA Act Broker</a>
+                        <div className="vert-bar" />
+                    </span>
+                    <select
+                        className={"navbar-selector " + this.state.type}
+                        onChange={this.handleChange.bind(this)}
+                        value={this.state.type}>
+                        <option value="fabs">
+                            Financial Assistance
+                            <br />
+                            Broker Submission (FABS)
+                        </option>
+                        <option value="dabs">
+                            Data Act Broker
+                            <br />
+                            Submission (DABS)
+                        </option>
+                    </select>
+                </div>);
+        }
+
         return (
             <nav className={"navbar navbar-default usa-da-header" + navClass}>
                 <SkipNavigationLink />
@@ -143,22 +179,8 @@ export class Navbar extends React.Component {
                                 <span className="icon-bar" />
                                 <span className="icon-bar" />
                             </button>
-                            <span className="navbar-brand usa-da-header-brand">
-                                <span className="brand">
-                                    <a href="#/">DATA Act Broker</a>
-                                    <div className="vert-bar" />
-                                </span>
-                                <select
-                                    className={"navbar-selector " + this.state.type}
-                                    onChange={this.handleChange.bind(this)}
-                                    value={this.state.type}>
-                                    <option value="fabs">
-                                        Financial Assistance Broker Submission (FABS)
-                                    </option>
-                                    <option value="dabs">
-                                        Data Act Broker Submission (DABS)
-                                    </option>
-                                </select>
+                            <span className="navbar-brand usa-da-header-brand" >
+                                {dropDown}
                             </span>
                         </div>
 

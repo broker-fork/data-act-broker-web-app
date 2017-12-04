@@ -104,7 +104,7 @@ export default class LandingContent extends React.Component {
                     </p>
                     <p>
                         Details on how to format your data, including required and optional fields, can be found
-                        in the <a href="/#/FABSHelp" target="_blank" rel="noopener noreferrer" >Help section</a>.
+                        in the <a href="/#/FABSHelp" target="_blank" rel="noopener noreferrer" > Help section</a>.
                     </p>
                 </div>);
         }
@@ -118,7 +118,7 @@ export default class LandingContent extends React.Component {
                     </p>
                     <p>
                         Details on how to format your data, including required and optional fields, can be found
-                        in the <a href="/#/help" target="_blank" rel="noopener noreferrer" >Help section</a>.
+                        in the <a href="/#/help" target="_blank" rel="noopener noreferrer" > Help section</a>.
                     </p>
                 </div>);
         }
@@ -129,7 +129,7 @@ export default class LandingContent extends React.Component {
                     <p>
                         Details on how to format your data against the latest version of the DATA Act
                         Information Model Schema (DAIMS) can be found on the
-                        <a href="/#/help" target="_blank" rel="noopener noreferrer" >Help section</a>.
+                        <a href="/#/help" target="_blank" rel="noopener noreferrer" > Help section</a>.
                     </p>
                 </div>);
         }
