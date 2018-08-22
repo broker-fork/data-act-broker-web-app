@@ -19,6 +19,12 @@ const prepareFilesNewSub = (fileDict) => {
         .field('reporting_period_start_date', fileDict.reporting_period_start_date)
         .field('reporting_period_end_date', fileDict.reporting_period_end_date)
         .field('is_quarter', fileDict.is_quarter)
+        .on('progress', function (ev) {
+            console.log(ev)
+            if ((ev.total / ev.loaded) % 5 == 0) {
+                console.log("Upload " + (ev.loaded / ev.total) + " percent complete.")
+            }
+        })
         .end((err, res) => {
             if (err) {
                 const response = Object.assign({}, res.body);
