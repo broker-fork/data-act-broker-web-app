@@ -49,27 +49,18 @@ export class DashboardContainer extends React.Component {
             activeTotal: 0,
             certifiedTotal: 0,
             activeSubmissions: [],
-            certifiedSubmissions: [],
-            type: this.props.type
+            certifiedSubmissions: []
+            // type: this.props.type
         };
+
+        this.loadTableData = this.loadTableData.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.type !== this.state.type) {
-            this.setState({ type: nextProps.type });
-        }
+    componentDidMount() {
+        this.loadTableData();
     }
 
-    componentWillUnmount() {
-        this.props.resetDashboardFilters({
-            dashboard: this.props.type
-        });
-        this.props.resetAppliedFilters({
-            dashboard: this.props.type
-        });
-    }
-
-    loadTableData(page = 1, certified = false, category = 'modified', order = 'desc', appliedFilters) {
+    loadTableData(page = 1, certified = false, category = 'modified', order = 'desc', appliedFilters = this.props.appliedFilters[this.props.type].active) {
     /**
         Sortable fields: Valid values for category
         'modified','reporting','status','agency','submitted_by'
@@ -125,7 +116,7 @@ export class DashboardContainer extends React.Component {
             <DashboardContent
                 {...this.state}
                 {...this.props}
-                loadTableData={this.loadTableData.bind(this)} />
+                loadTableData={this.loadTableData} />
         );
     }
 }
