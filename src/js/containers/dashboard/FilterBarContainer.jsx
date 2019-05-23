@@ -41,6 +41,14 @@ export class FilterBarContainer extends React.Component {
             filterCount: 0,
             applied: false
         };
+
+        this.prepareFilters = this.prepareFilters.bind(this);
+    }
+
+    componentDidMount() {
+        if (this.props.appliedFilters) {
+            this.prepareFilters(this.props.stagedFilters, this.props.appliedFilters);
+        }
     }
 
     componentDidUpdate(prevProps) {
