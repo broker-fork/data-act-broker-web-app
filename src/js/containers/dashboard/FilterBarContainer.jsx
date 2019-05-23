@@ -46,7 +46,11 @@ export class FilterBarContainer extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.appliedFilters) {
+        const appliedFiltersExist = Object.keys(this.props.appliedFilters).reduce((bool, filter) => {
+            if (bool) return bool; // if there's one filter that is not an empty array this will be true, so the whole variable should evaluate to true
+            return this.props.appliedFilters[filter].length > 0; // if all values thus far are empty arrays, update bool to this return value
+        }, false);
+        if (appliedFiltersExist) {
             this.prepareFilters(this.props.stagedFilters, this.props.appliedFilters);
         }
     }
