@@ -46,12 +46,16 @@ export class FilterBarContainer extends React.Component {
     }
 
     componentDidMount() {
-        const appliedFiltersExist = Object.keys(this.props.appliedFilters).reduce((bool, filter) => {
-            if (bool) return bool; // if there's one filter that is not an empty array this will be true, so the whole variable should evaluate to true
-            return this.props.appliedFilters[filter].length > 0; // if all values thus far are empty arrays, update bool to this return value
+        const { appliedFilters, stagedFilters } = this.props;
+        const appliedFiltersExist = Object.keys(appliedFilters).reduce((bool, filter) => {
+            if (bool) return bool; // if there's one filter that is not empty this will evaluate to true, so the whole variable should evaluate to true
+            if (filter === 'lastDateModified') { // this is an object
+                return appliedFilters[filter].endDate && appliedFilters[filter].startDate;
+            }
+            return appliedFilters[filter].length > 0; // if all values thus far are empty arrays, update bool to this return value
         }, false);
         if (appliedFiltersExist) {
-            this.prepareFilters(this.props.stagedFilters, this.props.appliedFilters);
+            this.prepareFilters(stagedFilters, appliedFilters);
         }
     }
 
