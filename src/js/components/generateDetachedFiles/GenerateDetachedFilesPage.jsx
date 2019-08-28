@@ -3,7 +3,7 @@
 * Created by Alisa Burdeyny
 */
 
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 import React, { PropTypes } from 'react';
 import moment from 'moment';
@@ -359,12 +359,12 @@ export default class GenerateDetachedFilesPage extends React.Component {
                                             </div>
                                         </div>
 
-                                        <ReactCSSTransitionGroup
+                                        <CSSTransitionGroup
                                             transitionName="usa-da-meta-fade"
                                             transitionEnterTimeout={500}
                                             transitionLeaveTimeout={300}>
                                             {dateSelect}
-                                        </ReactCSSTransitionGroup>
+                                        </CSSTransitionGroup>
                                     </div>
                                 </div>
                             </div>

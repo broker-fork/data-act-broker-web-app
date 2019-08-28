@@ -4,7 +4,7 @@
 */
 
 import React, { PropTypes } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import { Link } from 'react-router';
 import AgencyListContainer from '../../containers/SharedContainers/AgencyListContainer';
 import * as Icons from '../SharedComponents/icons/Icons';
@@ -245,26 +245,26 @@ export default class AddDataMeta extends React.Component {
                                     </div>
                                 </div>
 
-                                <ReactCSSTransitionGroup
+                                <CSSTransitionGroup
                                     transitionName="usa-da-meta-fade"
                                     transitionEnterTimeout={500}
                                     transitionLeaveTimeout={300}>
                                     {dateTypeField}
-                                </ReactCSSTransitionGroup>
+                                </CSSTransitionGroup>
 
-                                <ReactCSSTransitionGroup
+                                <CSSTransitionGroup
                                     transitionName="usa-da-meta-fade"
                                     transitionEnterTimeout={500}
                                     transitionLeaveTimeout={300}>
                                     {dateRangeField}
-                                </ReactCSSTransitionGroup>
+                                </CSSTransitionGroup>
 
-                                <ReactCSSTransitionGroup
+                                <CSSTransitionGroup
                                     transitionName="usa-da-meta-fade"
                                     transitionEnterTimeout={500}
                                     transitionLeaveTimeout={300}>
                                     {submissionComponent}
-                                </ReactCSSTransitionGroup>
+                                </CSSTransitionGroup>
                             </div>
                             <div className="usa-da-guide-link">
                                 <a href="#/submissionGuide?force=true">View Submission Guide</a>
