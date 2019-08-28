@@ -53,7 +53,7 @@ class SubmissionGuideContainer extends React.Component {
     }
 
     sendToAddData() {
-        hashHistory.push('/addData/');
+        this.props.history.push('/addData/');
     }
 
     render() {

@@ -55,7 +55,7 @@ class RouterContainer extends React.Component {
     logout() {
         LoginHelper.performLogout()
             .then(() => {
-                hashHistory.push('/login');
+                this.props.history.push('/login');
             });
     }
 

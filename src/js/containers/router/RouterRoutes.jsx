@@ -31,7 +31,7 @@ const performAutoLogin = (location, replace) => {
     const search = location.search;
     const query = location.query;
 
-    let pushMethod = hashHistory.push;
+    let pushMethod = this.props.history.push;
     if (replace) {
         pushMethod = replace;
     }

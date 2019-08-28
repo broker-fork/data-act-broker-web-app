@@ -7,6 +7,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import Cookies from 'js-cookie';
+import { withRouter } from 'react-router-dom';
 
 import reducers from '../redux/reducers/index';
 import { kGlobalConstants } from '../GlobalConstants';
@@ -29,7 +30,7 @@ const store = createStore(reducers, {}, devExtension);
 const storeSingleton = new StoreSingleton();
 storeSingleton.setStore(store);
 
-export default class AppContainer extends React.Component {
+class AppContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -82,3 +83,5 @@ export default class AppContainer extends React.Component {
         );
     }
 }
+
+export default withRouter(AppContainer);

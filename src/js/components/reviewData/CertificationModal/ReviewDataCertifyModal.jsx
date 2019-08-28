@@ -61,7 +61,7 @@ export default class ReviewDataCertifyModal extends React.Component {
                 this.setState({ loading: false });
                 this.closeModal();
                 // Redirect to submission dashboard after successful certification
-                hashHistory.push("/dashboard");
+                this.props.history.push("/dashboard");
             })
             .catch((error) => {
                 let errorMessage = "An error occurred while attempting to certify the submission. " +
