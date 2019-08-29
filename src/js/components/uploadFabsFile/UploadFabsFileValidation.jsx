@@ -54,7 +54,6 @@ export class UploadFabsFileValidation extends React.Component {
 
         this.state = {
             agency: "",
-            submissionID: this.props.params.submissionID ? this.props.params.submissionID : 0,
             fabsFile: {},
             cgac_code: "",
             jobResults: { fabs: {} },
@@ -76,19 +75,16 @@ export class UploadFabsFileValidation extends React.Component {
 
     componentDidMount() {
         this.isUnmounted = false;
-        if (this.state.submissionID) {
-            this.setSubmissionMetadata(this.state.submissionID);
-            this.checkFileStatus(this.state.submissionID);
+        if (this.props.params.submissionID) {
+            this.setSubmissionMetadata(this.props.params.submissionID);
+            this.checkFileStatus(this.props.params.submissionID);
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.params.submissionID !== this.state.submissionID) {
-            this.setState({
-                submissionID: nextProps.params.submissionID
-            });
-            this.setSubmissionMetadata(nextProps.params.submissionID);
-            this.checkFileStatus(nextProps.params.submissionID);
+    componentDidUpdate(prevProps) {
+        if (prevProps.params.submissionID !== this.props.params.submissionID && this.props.params.submissionID) {
+            this.setSubmissionMetadata(this.props.params.submissionID);
+            this.checkFileStatus(this.props.params.submissionID);
         }
     }
 
@@ -134,9 +130,9 @@ export class UploadFabsFileValidation extends React.Component {
     }
 
     revalidate() {
-        ReviewHelper.revalidateSubmission(this.state.submissionID, true)
+        ReviewHelper.revalidateSubmission(this.props.params.submissionID, true)
             .then(() => {
-                this.checkFileStatus(this.state.submissionID);
+                this.checkFileStatus(this.props.params.submissionID);
             })
             .catch((error) => {
                 const errMsg = error.message || "An error occurred while attempting to revalidate the submission. " +
@@ -524,7 +520,7 @@ export class UploadFabsFileValidation extends React.Component {
                 <PublishModal
                     rows={this.state.fabs_meta}
                     submit={this.submitFabs.bind(this)}
-                    submissionID={this.state.submissionID}
+                    submissionID={this.props.params.submissionID}
                     closeModal={this.closeModal.bind(this)}
                     isOpen={this.state.showPublish}
                     published={this.state.published} />
