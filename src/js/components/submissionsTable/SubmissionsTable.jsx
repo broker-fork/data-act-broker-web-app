@@ -70,6 +70,7 @@ export default class SubmissionsTable extends React.Component {
     }
 
     componentDidMount() {
+        console.log(typeof(Pagination));
         this.props.loadTableData(
             this.state.currentPage, this.props.isCertified, this.getCategory(),
             this.state.sortDirection, this.props.type === 'fabs', this.props.appliedFilters,
@@ -372,14 +373,6 @@ export default class SubmissionsTable extends React.Component {
     }
 
     render() {
-        const paginator = (
-            <Pagination
-                currentPage={this.state.currentPage}
-                totalItems={this.props.total}
-                changePage={this.changePage}
-                pageSize={10}
-                goToPage />);
-
         const tableHeaderClasses = cx({
             'submission-table-content': true,
             loading: this.props.isLoading || this.state.noResults || this.props.errorMessage
@@ -400,6 +393,7 @@ export default class SubmissionsTable extends React.Component {
             tableMessage = <LoadingMessage />;
         }
         else if (this.props.errorMessage) {
+            console.log('error message from submissionsTable:', this.props.errorMessage);
             tableMessage = <ErrorMessageOverlay errorMessage={this.props.errorMessage} />;
         }
         else if (this.state.noResults) {
@@ -421,7 +415,12 @@ export default class SubmissionsTable extends React.Component {
                     {tableMessage}
                 </div>
                 <div className="paginator-wrap">
-                    {paginator}
+                    <Pagination
+                        currentPage={this.state.currentPage}
+                        totalItems={this.props.total}
+                        changePage={this.changePage}
+                        pageSize={10}
+                        goToPage />
                 </div>
             </div>
         );

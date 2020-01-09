@@ -127,6 +127,7 @@ export class SubmissionsTableContainer extends React.Component {
                 });
             })
             .catch((error) => {
+                console.log('Error in Submisssions Table Container', error.message);
                 this.setState({
                     [`${tableName}Total`]: 0,
                     [`${tableName}Submissions`]: [],
