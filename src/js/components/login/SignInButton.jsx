@@ -10,7 +10,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
-    onClick: PropTypes.func.isRequired,
     buttonText: PropTypes.string.isRequired,
     disabled: PropTypes.bool
 };
@@ -30,7 +29,6 @@ export default class SignInButton extends React.Component {
                 className={`usa-da-button btn-primary btn-lg pull-right${disabled}`}
                 disabled={this.props.disabled}
                 type="submit"
-                onClick={this.props.onClick}
                 data-testid="signin">
                 {this.props.buttonText}
             </button>

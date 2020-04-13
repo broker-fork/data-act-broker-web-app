@@ -34,8 +34,9 @@ export default class LoginPanel extends React.Component {
         };
     }
 
-    loginClicked() {
+    loginClicked(e) {
         this.props.performLogin(this.state.username, this.state.password);
+        e.preventDefault();
     }
 
     handleKeyPress(e) {
@@ -67,7 +68,7 @@ export default class LoginPanel extends React.Component {
 
         return (
             <div className="login-form-wrap">
-                <form>
+                <form onSubmit={this.loginClicked.bind(this)}>
                     <div className="row">
                         <div className="col-md-12">
                             <Username handleChange={this.handleUsernameChange.bind(this)} tabIndex="0" />
@@ -81,7 +82,6 @@ export default class LoginPanel extends React.Component {
                     <div className="row">
                         <div className="col-sm-12 col-md-offset-4 col-md-8">
                             <SignInButton
-                                onClick={this.loginClicked.bind(this)}
                                 buttonText="Sign In"
                                 disabled={this.props.loading} />
                         </div>
