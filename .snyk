@@ -6,3 +6,9 @@ patch:
   'npm:extend:20180424':
     - superagent-use > extend:
         patched: '2020-12-14T15:19:31.268Z'
+    - superagent > extend:
+        patched: '2021-01-05T15:20:55.568Z'
+    - superagent-use > extend:
+        patched: '2021-01-05T15:20:55.568Z'
+    - data-transparency-ui > storybook > @storybook/cli > @storybook/codemod > @mdx-js/mdx > remark-mdx > unified > extend:
+        patched: '2021-01-05T15:20:55.568Z'
